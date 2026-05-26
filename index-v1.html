@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentoria IA para Gestores — Rafael Lima</title>
+  <meta name="description" content="Programa 1:1 de 8 semanas que parte do diagnóstico real da sua rotina para ter IA aplicada em pontos críticos do seu trabalho — e mensurável.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── TOKENS ─────────────────────────────────────────────── */
+    :root {
+      --coral:        #D97757;
+      --coral-dark:   #C9633E;
+      --coral-soft:   #F2D5C3;
+      --white:        #FFFFFF;
+      --cream-50:     #FAF7F2;
+      --cream-100:    #F5F1ED;
+      --cream-200:    #EBE6DD;
+      --terra-900:    #2B1F17;
+      --terra-700:    #4A382C;
+      --text-muted:   #8A8A8A;
+      --ocre:         #C9943A;
+      --ocre-soft:    #F0E2C2;
+      --success:      #6B8E4E;
+      --success-bg:   #E5EDD9;
+      --shadow-sm:    0 1px 2px rgba(43,31,23,.04);
+      --shadow-md:    0 4px 12px rgba(43,31,23,.07);
+      --radius-sm:    6px;
+      --radius-card:  14px;
+      --radius-full:  9999px;
+      --ease-spring:  cubic-bezier(.16, 1, .3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter Tight', system-ui, sans-serif;
+      background: var(--cream-100);
+      color: var(--terra-900);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    strong { font-weight: 600; }
+
+    .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── SCROLL REVEAL ───────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .7s var(--ease-spring), transform .7s var(--ease-spring);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .rd1 { transition-delay: .08s; }
+    .rd2 { transition-delay: .16s; }
+    .rd3 { transition-delay: .24s; }
+    .rd4 { transition-delay: .32s; }
+    .rd5 { transition-delay: .40s; }
+
+    /* ── UTILS ───────────────────────────────────────────────── */
+    .label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 10px;
+    }
+    .sec-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(24px, 5vw, 38px);
+      font-weight: 600;
+      font-variation-settings: 'opsz' 72, 'SOFT' 30;
+      line-height: 1.12;
+      letter-spacing: -.4px;
+      color: var(--terra-900);
+      margin-bottom: 12px;
+    }
+    .sec-desc {
+      font-size: 16px;
+      color: var(--terra-700);
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+    section { padding: 96px 0; }
+
+    .section-divider {
+      height: 1px;
+      border: none;
+      background: linear-gradient(90deg, transparent 0%, var(--cream-200) 30%, var(--cream-200) 70%, transparent 100%);
+      margin: 0;
+    }
+
+    /* ── STICKY TOP ──────────────────────────────────────────── */
+    .sticky-top {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: rgba(245,241,237,.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(235,230,221,.6);
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      transform: translateY(-100%);
+      transition: transform .4s var(--ease-spring);
+    }
+    .sticky-top.visible { transform: translateY(0); }
+    .st-brand {
+      font-family: 'Fraunces', serif;
+      font-size: 14px;
+      font-weight: 600;
+      font-variation-settings: 'opsz' 96, 'SOFT' 30;
+      color: var(--terra-900);
+      white-space: nowrap;
+    }
+    .st-brand em { font-style: normal; color: var(--coral); }
+
+    /* ── BTN-CTA  (arrow-circle) ─────────────────────────────── */
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      background: var(--coral);
+      border-radius: var(--radius-sm);
+      padding: 5px 5px 5px 24px;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: background .5s var(--ease-spring),
+                  transform .5s var(--ease-spring),
+                  box-shadow .5s var(--ease-spring);
+    }
+    .btn-cta:hover {
+      background: var(--coral-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(217,119,87,.35);
+    }
+    .btn-cta-text {
+      color: #fff;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      white-space: nowrap;
+      margin-right: 14px;
+    }
+    .btn-cta-arrow {
+      width: 50px; height: 50px;
+      background: var(--terra-900);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: white;
+      flex-shrink: 0;
+      transition: transform .5s var(--ease-spring);
+      line-height: 1;
+    }
+    .btn-cta:hover .btn-cta-arrow { transform: rotate(-45deg); }
+
+    /* sm variant */
+    .btn-cta-sm { padding: 3px 3px 3px 16px; }
+    .btn-cta-sm .btn-cta-text { font-size: 11px; margin-right: 10px; }
+    .btn-cta-sm .btn-cta-arrow { width: 36px; height: 36px; font-size: 15px; }
+
+    /* full-width variant */
+    .btn-cta-full { width: 100%; justify-content: space-between; }
+
+    /* ── HERO ────────────────────────────────────────────────── */
+    .hero {
+      padding: 108px 0 80px;
+      text-align: center;
+      background: var(--cream-100);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 500px;
+      background: radial-gradient(circle, rgba(217,119,87,.08) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--coral-soft);
+      color: var(--coral-dark);
+      border: 1px solid rgba(201,99,62,.2);
+      border-radius: var(--radius-full);
+      padding: 5px 14px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .eyebrow-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--coral);
+      animation: pulseDot 2s ease-in-out infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: .45; transform: scale(.7); }
+    }
+    .hero-headline {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(36px, 8vw, 58px);
+      font-weight: 500;
+      font-variation-settings: 'opsz' 144, 'SOFT' 50;
+      line-height: 1.06;
+      letter-spacing: -1.5px;
+      color: var(--terra-900);
+      margin-bottom: 22px;
+    }
+    .hero-headline em { font-style: italic; color: var(--coral); }
+    .hero-sub {
+      font-size: clamp(15px, 2.5vw, 18px);
+      color: var(--terra-700);
+      max-width: 540px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+
+    /* Stats grid */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--cream-200);
+      border: 1px solid var(--cream-200);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      max-width: 580px;
+      margin: 0 auto 36px;
+    }
+    .hero-stat {
+      background: var(--white);
+      padding: 16px 10px;
+      text-align: center;
+    }
+    .hero-stat-value {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(22px, 3.5vw, 30px);
+      font-weight: 600;
+      font-variation-settings: 'opsz' 48, 'SOFT' 0;
+      line-height: 1;
+      color: var(--coral);
+      margin-bottom: 5px;
+    }
+    .hero-stat-label {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--text-muted);
+    }
+
+    .hero-cta-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-note::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--success);
+      flex-shrink: 0;
+    }
+
+    /* ── DOR — INTERACTIVE CARDS ─────────────────────────────── */
+    .pain-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .pain-card {
+      background: var(--white);
+      border: 1px solid var(--cream-200);
+      border-radius: var(--radius-card);
+      padding: 15px 20px 15px 54px;
+      font-size: 15px;
+      color: var(--terra-700);
+      line-height: 1.55;
+      position: relative;
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      user-select: none;
+      transition: background .35s var(--ease-spring),
+                  border-color .35s var(--ease-spring),
+                  transform .2s var(--ease-spring);
+    }
+    .pain-card:hover { border-color: rgba(217,119,87,.3); transform: translateX(3px); }
+    .pain-card.checked {
+      background: var(--coral-soft);
+      border-color: rgba(201,99,62,.4);
+    }
+    .pain-icon {
+      position: absolute;
+      left: 15px; top: 14px;
+      width: 28px; height: 28px;
+      border-radius: var(--radius-sm);
+      background: var(--cream-50);
+      border: 1px solid var(--cream-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--text-muted);
+      transition: background .35s var(--ease-spring),
+                  border-color .35s var(--ease-spring),
+                  color .35s var(--ease-spring);
+    }
+    .pain-card.checked .pain-icon {
+      background: var(--coral);
+      border-color: var(--coral);
+      color: white;
+    }
+    .pain-counter {
+      overflow: hidden;
+      max-height: 0;
+      margin-bottom: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition:
+        max-height .5s var(--ease-spring),
+        opacity .4s var(--ease-spring),
+        margin-bottom .4s var(--ease-spring);
+    }
+    .pain-counter.visible {
+      max-height: 200px;
+      opacity: 1;
+      pointer-events: auto;
+      margin-bottom: 16px;
+    }
+    .pain-counter-box {
+      background: var(--coral-soft);
+      border: 1px solid rgba(201,99,62,.3);
+      border-radius: var(--radius-card);
+      padding: 20px 24px;
+      text-align: center;
+    }
+    .pain-counter-num {
+      font-family: 'Fraunces', serif;
+      font-size: 52px;
+      font-weight: 600;
+      font-variation-settings: 'opsz' 96, 'SOFT' 0;
+      color: var(--coral-dark);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .pain-counter-text { font-size: 15px; color: var(--terra-700); }
+    .pain-turn {
+      background: var(--cream-50);
+      border: 1px solid var(--cream-200);
+      border-left: 3px solid var(--coral);
+      border-radius: 0 var(--radius-card) var(--radius-card) 0;
+      padding: 20px 24px;
+      font-size: 16px;
+      color: var(--terra-700);
+      line-height: 1.6;
+    }
+
+    /* ── MECANISMO — PHASE TABS ──────────────────────────────── */
+    .mechanism-intro {
+      background: var(--white);
+      border: 1px solid var(--cream-200);
+      border-left: 3px solid var(--terra-900);
+      border-radius: 0 var(--radius-card) var(--radius-card) 0;
+      padding: 18px 22px;
+      font-size: 15px;
+      color: var(--terra-700);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .phase-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 2px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+    .phase-tabs::-webkit-scrollbar { display: none; }
+    .phase-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      padding: 13px 18px;
+      border: 1px solid var(--cream-200);
+      border-radius: var(--radius-sm);
+      background: var(--white);
+      cursor: pointer;
+      white-space: normal;
+      transition: all .3s var(--ease-spring);
+      flex: 1;
+      min-width: 0;
+    }
+    .phase-tab:hover { border-color: rgba(217,119,87,.3); background: var(--cream-50); }
+    .phase-tab.active { background: var(--terra-900); border-color: var(--terra-900); }
+    .phase-tab-num {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--text-muted);
+    }
+    .phase-tab.active .phase-tab-num { color: rgba(255,255,255,.45); }
+    .phase-tab-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--terra-700);
+      letter-spacing: -.01em;
+    }
+    .phase-tab.active .phase-tab-label { color: #fff; }
+    .phase-tab-sessions { font-size: 10px; color: var(--text-muted); }
+    .phase-tab.active .phase-tab-sessions { color: rgba(255,255,255,.4); }
+
+    .phase-panel { display: none; }
+    .phase-panel.active { display: block; }
+    .phase-content {
+      background: var(--white);
+      border: 1px solid var(--cream-200);
+      border-radius: 0 var(--radius-card) var(--radius-card) var(--radius-card);
+      padding: 24px 28px;
+      box-shadow: var(--shadow-sm);
+    }
+    .phase-content-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .phase-content-num {
+      width: 40px; height: 40px;
+      background: var(--coral-soft);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 700;
+      font-variation-settings: 'opsz' 48;
+      color: var(--coral-dark);
+      flex-shrink: 0;
+    }
+    .phase-content-title {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--terra-900);
+    }
+    .phase-content-sessions {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .phase-content-desc {
+      font-size: 15px;
+      color: var(--terra-700);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+    .phase-content-why {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      padding-top: 14px;
+      border-top: 1px solid var(--cream-200);
+    }
+    .phase-content-why strong { color: var(--terra-700); }
+
+    .mechanism-quote {
+      margin-top: 24px;
+      background: var(--cream-50);
+      border-left: 3px solid var(--coral);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 18px 22px;
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-style: italic;
+      font-weight: 400;
+      font-variation-settings: 'opsz' 72, 'SOFT' 80;
+      color: var(--terra-700);
+      line-height: 1.5;
+    }
+    .mechanism-quote cite {
+      display: block;
+      margin-top: 10px;
+      font-style: normal;
+      font-size: 13px;
+      font-family: 'Inter Tight', sans-serif;
+      color: var(--text-muted);
+    }
+
+    /* ── SOBRE RAFAEL ────────────────────────────────────────── */
+    .about-card {
+      background: var(--white);
+      border: 1px solid var(--cream-200);
+      border-radius: var(--radius-card);
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+    }
+    .about-header { display: flex; align-items: center; gap: 18px; margin-bottom: 24px; }
+    .about-avatar {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--coral);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 700;
+      font-variation-settings: 'opsz' 96, 'SOFT' 30;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .about-name {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 600;
+      font-variation-settings: 'opsz' 48, 'SOFT' 20;
+      color: var(--terra-900);
+      margin-bottom: 2px;
+    }
+    .about-role { font-size: 13px; color: var(--text-muted); }
+    .about-body { font-size: 15px; color: var(--terra-700); line-height: 1.7; margin-bottom: 22px; }
+    .about-body p + p { margin-top: 12px; }
+    .about-links {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .about-link {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--coral-dark);
+      border-bottom: 1px solid rgba(201,99,62,.3);
+      padding-bottom: 1px;
+      transition: color .2s, border-color .2s;
+    }
+    .about-link:hover { color: var(--coral); border-color: var(--coral); }
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--cream-200);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .about-stat {
+      background: var(--cream-50);
+      padding: 14px 16px;
+      text-align: center;
+    }
+    .about-stat-value {
+      font-family: 'Fraunces', serif;
+      font-size: 22px;
+      font-weight: 600;
+      font-variation-settings: 'opsz' 48, 'SOFT' 0;
+      color: var(--coral);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .about-stat-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--text-muted); }
+    .about-credentials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-top: 20px;
+      border-top: 1px solid var(--cream-200);
+    }
+    .cred-badge {
+      background: var(--cream-50);
+      border: 1px solid var(--cream-200);
+      border-radius: var(--radius-sm);
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--terra-700);
+    }
+
+    /* ── ENTREGÁVEIS — 1px gap grid ──────────────────────────── */
+    .deliverables {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--cream-200);
+      border: 1px solid var(--cream-200);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .dlv-item {
+      background: var(--white);
+      padding: 18px 22px 18px 60px;
+      position: relative;
+      transition: background .2s;
+    }
+    .dlv-item:hover { background: var(--cream-50); }
+    .dlv-num {
+      position: absolute;
+      left: 18px; top: 18px;
+      width: 28px; height: 28px;
+      background: var(--coral);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .dlv-title { font-size: 15px; font-weight: 600; color: var(--terra-900); margin-bottom: 4px; }
+    .dlv-desc  { font-size: 14px; color: var(--terra-700); line-height: 1.5; }
+    .dlv-shift { display: block; margin-top: 8px; font-size: 13px; color: var(--coral-dark); font-weight: 500; }
+    .dlv-shift::before { content: '→ '; }
+    .dlv-bonus { background: var(--ocre-soft); }
+    .dlv-bonus:hover { background: #f0e2c2cc; }
+    .dlv-bonus-label {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--ocre);
+      background: rgba(201,148,58,.15);
+      border: 1px solid rgba(201,148,58,.3);
+      border-radius: 4px;
+      padding: 2px 7px;
+      margin-bottom: 6px;
+    }
+    .dlv-bonus .dlv-num { background: var(--ocre); }
+
+    /* ── QUALIFICAÇÃO — 1px gap grid ─────────────────────────── */
+    .qual-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--cream-200);
+      border: 1px solid var(--cream-200);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .qual-card { background: var(--white); padding: 24px; }
+    .qual-header {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--cream-200);
+    }
+    .qual-card.yes .qual-header { color: var(--success); }
+    .qual-card.no  .qual-header { color: var(--text-muted); }
+    .qual-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .qual-list li {
+      font-size: 14px;
+      color: var(--terra-700);
+      line-height: 1.45;
+      padding-left: 22px;
+      position: relative;
+    }
+    .qual-card.yes .qual-list li::before { content: '✓'; position: absolute; left: 0; color: var(--success); font-weight: 700; }
+    .qual-card.no  .qual-list li::before { content: '×'; position: absolute; left: 0; color: var(--text-muted); font-weight: 700; }
+    .qual-note {
+      background: var(--cream-50);
+      border: 1px solid var(--cream-200);
+      border-radius: var(--radius-card);
+      padding: 18px 22px;
+      font-size: 15px;
+      color: var(--terra-700);
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* ── OFERTA ──────────────────────────────────────────────── */
+    .value-stack {
+      background: var(--cream-200);
+      border: 1px solid var(--cream-200);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .vs-header {
+      padding: 13px 22px;
+      background: var(--cream-50);
+      border-bottom: 1px solid var(--cream-200);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .vs-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 22px;
+      border-bottom: 1px solid var(--cream-200);
+      font-size: 14px;
+      color: var(--terra-700);
+      background: var(--white);
+      transition: background .2s;
+    }
+    .vs-row:last-child { border-bottom: none; }
+    .vs-row:hover { background: var(--cream-50); }
+    .vs-check { color: var(--coral); font-weight: 700; flex-shrink: 0; }
+    .vs-label { flex: 1; }
+    .vs-value { font-size: 12px; font-weight: 600; color: var(--text-muted); white-space: nowrap; flex-shrink: 0; }
+    .vs-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 13px 22px;
+      background: var(--cream-50);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--terra-900);
+    }
+    .vs-total-value {
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--coral-dark);
+    }
+
+    .price-block {
+      background: var(--white);
+      border: 1px solid var(--cream-200);
+      border-radius: var(--radius-card);
+      padding: 28px 24px;
+      text-align: center;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+    .price-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .price-main {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(44px, 10vw, 64px);
+      font-weight: 600;
+      font-variation-settings: 'opsz' 96, 'SOFT' 0;
+      letter-spacing: -2px;
+      line-height: 1;
+      color: var(--terra-900);
+      margin-bottom: 10px;
+    }
+    .price-main sup { font-size: 22px; font-weight: 600; vertical-align: super; letter-spacing: 0; }
+    .price-note { font-size: 14px; color: var(--terra-700); margin-bottom: 4px; line-height: 1.5; }
+    .price-pix {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--success-bg);
+      border: 1px solid rgba(107,142,78,.2);
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--success);
+      margin-top: 14px;
+    }
+
+    .guarantee-hero {
+      background: var(--coral-soft);
+      border: 1.5px solid rgba(201,99,62,.3);
+      border-radius: var(--radius-card);
+      padding: 28px 28px 24px;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .guarantee-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, var(--coral) 50%, transparent 100%);
+    }
+    .guarantee-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--coral-dark);
+      background: rgba(201,99,62,.12);
+      border: 1px solid rgba(201,99,62,.25);
+      border-radius: var(--radius-sm);
+      padding: 4px 10px;
+      margin-bottom: 14px;
+    }
+    .guarantee-hero-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(18px, 3.5vw, 24px);
+      font-weight: 600;
+      font-variation-settings: 'opsz' 48, 'SOFT' 30;
+      color: var(--coral-dark);
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+    .guarantee-hero-body { font-size: 15px; color: var(--terra-700); line-height: 1.65; }
+    .guarantee-hero-body + .guarantee-hero-body { margin-top: 10px; }
+
+    .cta-block { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .cta-sub { font-size: 13px; color: var(--text-muted); text-align: center; line-height: 1.6; }
+
+    /* ── FAQ — CSS ACCORDION (grid-rows trick) ───────────────── */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--cream-200);
+      border: 1px solid var(--cream-200);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+    }
+    .faq-item { background: var(--white); }
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 22px;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--terra-900);
+      cursor: pointer;
+      text-align: left;
+      background: none;
+      border: none;
+      width: 100%;
+      transition: background .2s;
+    }
+    .faq-question:hover { background: var(--cream-50); }
+    .faq-num {
+      font-size: 10px;
+      font-weight: 700;
+      color: rgba(138,138,138,.5);
+      flex-shrink: 0;
+      min-width: 20px;
+    }
+    .faq-chevron {
+      font-size: 18px;
+      line-height: 1;
+      color: var(--text-muted);
+      transition: transform .4s var(--ease-spring);
+      flex-shrink: 0;
+    }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+    .faq-answer-wrap {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows .4s var(--ease-spring);
+      overflow: hidden;
+    }
+    .faq-item.open .faq-answer-wrap { grid-template-rows: 1fr; }
+    .faq-answer-inner { overflow: hidden; }
+    .faq-answer {
+      padding: 0 22px 18px;
+      border-top: 1px solid var(--cream-200);
+      padding-top: 14px;
+      font-size: 14px;
+      color: var(--terra-700);
+      line-height: 1.7;
+    }
+    .faq-answer strong { color: var(--terra-900); }
+
+    /* ── FECHAMENTO ──────────────────────────────────────────── */
+    .closing { text-align: center; padding: 96px 0 100px; }
+    .closing-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 500;
+      font-variation-settings: 'opsz' 96, 'SOFT' 50;
+      line-height: 1.18;
+      letter-spacing: -.5px;
+      color: var(--terra-900);
+      margin-bottom: 18px;
+    }
+    .closing-body {
+      font-size: 16px;
+      color: var(--terra-700);
+      max-width: 520px;
+      margin: 0 auto 16px;
+      line-height: 1.7;
+    }
+    .closing-identity {
+      background: var(--cream-50);
+      border: 1px solid var(--cream-200);
+      border-radius: var(--radius-card);
+      padding: 22px 28px;
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: clamp(16px, 3vw, 20px);
+      font-weight: 400;
+      font-variation-settings: 'opsz' 72, 'SOFT' 80;
+      color: var(--terra-700);
+      max-width: 500px;
+      margin: 0 auto 36px;
+      line-height: 1.5;
+    }
+    .closing-identity em { color: var(--coral); }
+    .closing-final-note {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-style: italic;
+      max-width: 480px;
+      margin: 20px auto 0;
+      line-height: 1.65;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────────── */
+    footer {
+      padding: 36px 24px;
+      border-top: 1px solid var(--cream-200);
+      text-align: center;
+      background: var(--cream-50);
+    }
+    .footer-brand {
+      font-family: 'Fraunces', serif;
+      font-size: 15px;
+      font-weight: 600;
+      font-variation-settings: 'opsz' 96, 'SOFT' 30;
+      color: var(--terra-900);
+      margin-bottom: 8px;
+    }
+    .footer-brand em { font-style: normal; color: var(--coral); }
+    footer p { font-size: 12px; color: var(--text-muted); line-height: 1.7; }
+    footer a { color: var(--terra-700); text-decoration: underline; text-underline-offset: 2px; }
+
+    /* ── WHATSAPP FLOAT ──────────────────────────────────────── */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      z-index: 999;
+      width: 56px; height: 56px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,.4);
+      transition: transform .3s var(--ease-spring), box-shadow .3s var(--ease-spring);
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 30px rgba(37,211,102,.55);
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .hero { padding: 88px 0 64px; }
+      section { padding: 64px 0; }
+      .closing { padding: 64px 0 72px; }
+      .about-card, .guarantee-hero, .price-block { padding: 22px 20px; }
+      .about-stats { grid-template-columns: 1fr; }
+      .qual-grid { grid-template-columns: 1fr; }
+      .phase-tabs { flex-wrap: wrap; }
+      .phase-tab { flex: none; min-width: calc(50% - 2px); }
+      .whatsapp-float { bottom: 20px; right: 20px; }
+    }
+    @media (max-width: 480px) {
+      .hero-stats { grid-template-columns: repeat(2, 1fr); max-width: 320px; }
+      .about-stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── STICKY TOP ───────────────────────────────────────── -->
+  <nav class="sticky-top" id="stickyTop">
+    <span class="st-brand">IA na <em>Prática</em></span>
+    <a href="SEU_LINK_WHATSAPP" class="btn-cta btn-cta-sm">
+      <span class="btn-cta-text">Verificar agenda</span>
+      <span class="btn-cta-arrow">→</span>
+    </a>
+  </nav>
+
+  <!-- ─── HERO ─────────────────────────────────────────────── -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        Mentoria 1:1 · Fortaleza / Remoto · Rafael Lima
+      </div>
+
+      <h1 class="hero-headline">
+        Pare de usar IA.<br>
+        Comece a redesenhar<br>
+        <em>sua rotina com ela.</em>
+      </h1>
+
+      <p class="hero-sub">
+        Um programa individual de 8 semanas que parte do diagnóstico real da
+        SUA rotina — não de template genérico — para ter IA aplicada em
+        pontos críticos do seu trabalho, mensurável.
+      </p>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value">16h</div>
+          <div class="hero-stat-label">mentoria 1:1</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">7</div>
+          <div class="hero-stat-label">entregas concretas</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">4</div>
+          <div class="hero-stat-label">fases estruturadas</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">30d</div>
+          <div class="hero-stat-label">acompanhamento pós</div>
+        </div>
+      </div>
+
+      <div class="hero-cta-area">
+        <a href="SEU_LINK_WHATSAPP" class="btn-cta">
+          <span class="btn-cta-text">Verificar disponibilidade de agenda</span>
+          <span class="btn-cta-arrow">→</span>
+        </a>
+        <p class="hero-note">Agenda limitada · Próximas vagas a confirmar</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ─── IDENTIFICAÇÃO ────────────────────────────────────── -->
+  <section>
+    <div class="container">
+      <p class="label reveal">Você se identifica?</p>
+      <h2 class="sec-title reveal">Isso soa familiar?</h2>
+      <p class="sec-desc reveal">Clique nos pontos que parecem com você. Se você chegou até aqui, provavelmente já tentou — e travou.</p>
+
+      <div class="pain-list">
+        <div class="pain-card reveal rd1" onclick="togglePain(this)">
+          <div class="pain-icon">☐</div>
+          Assisti tutorial, funcionou no demo. Na hora de aplicar no meu dia, trava. Refaço tudo do zero.
+        </div>
+        <div class="pain-card reveal rd2" onclick="togglePain(this)">
+          <div class="pain-icon">☐</div>
+          Passo 2 horas no ChatGPT e o resultado ainda não serve para enviar.
+        </div>
+        <div class="pain-card reveal rd3" onclick="togglePain(this)">
+          <div class="pain-icon">☐</div>
+          Já comprei curso de IA. Aprendi bastante. Não mudou quase nada na minha rotina.
+        </div>
+        <div class="pain-card reveal rd4" onclick="togglePain(this)">
+          <div class="pain-icon">☐</div>
+          Tenho medo de propor IA para a minha equipe — e passar vergonha se não funcionar.
+        </div>
+        <div class="pain-card reveal rd5" onclick="togglePain(this)">
+          <div class="pain-icon">☐</div>
+          Sinto que meus colegas estão avançando mais rápido. E não sei por quê eles conseguem e eu não.
+        </div>
+      </div>
+
+      <div class="pain-counter" id="painCounter">
+        <div class="pain-counter-box">
+          <div class="pain-counter-num" id="painCount">0</div>
+          <p class="pain-counter-text">pontos identificados — o diagnóstico já começou.</p>
+        </div>
+      </div>
+
+      <div class="pain-turn reveal">
+        Se algum desses soa familiar: o problema não é você. Não é comprometimento. Não é capacidade técnica.<br><br>
+        <strong>É a ausência de diagnóstico. Ferramenta sem método vira brinquedo.</strong>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ─── MECANISMO ─────────────────────────────────────────── -->
+  <section>
+    <div class="container">
+      <p class="label reveal">Como funciona</p>
+      <h2 class="sec-title reveal">Diagnóstico primeiro. Construção depois.</h2>
+      <p class="sec-desc reveal">A maioria dos cursos começa com a ferramenta. Este programa começa com você.</p>
+
+      <div class="mechanism-intro reveal">
+        Todo gestor que trava com IA tem o mesmo problema: tentou aplicar uma solução genérica numa rotina específica. O <strong>Método 5D</strong> parte do diagnóstico real do seu papel — dados, tecnologia, pessoas, processos e governança — antes de construir qualquer solução.
+      </div>
+
+      <div class="phase-tabs reveal">
+        <button class="phase-tab active" data-phase="1">
+          <span class="phase-tab-num">Fase 01</span>
+          <span class="phase-tab-label">Diagnóstico</span>
+          <span class="phase-tab-sessions">Sessões 1–2</span>
+        </button>
+        <button class="phase-tab" data-phase="2">
+          <span class="phase-tab-num">Fase 02</span>
+          <span class="phase-tab-label">Mapeamento</span>
+          <span class="phase-tab-sessions">Sessões 3–4</span>
+        </button>
+        <button class="phase-tab" data-phase="3">
+          <span class="phase-tab-num">Fase 03</span>
+          <span class="phase-tab-label">Construção</span>
+          <span class="phase-tab-sessions">Sessões 5–6</span>
+        </button>
+        <button class="phase-tab" data-phase="4">
+          <span class="phase-tab-num">Fase 04</span>
+          <span class="phase-tab-label">Implementação</span>
+          <span class="phase-tab-sessions">Sessões 7–8</span>
+        </button>
+      </div>
+
+      <div class="phase-panels">
+        <div class="phase-panel active" data-phase="1">
+          <div class="phase-content">
+            <div class="phase-content-header">
+              <div class="phase-content-num">1</div>
+              <div>
+                <p class="phase-content-title">Diagnóstico</p>
+                <p class="phase-content-sessions">Sessões 1–2 · 2 horas</p>
+              </div>
+            </div>
+            <p class="phase-content-desc">Mapeamos sua rotina em 5 dimensões: dados, tecnologia, pessoas, processos e governança. Estabelecemos um baseline mensurável de 5 tarefas para comparar pré e pós.</p>
+            <p class="phase-content-why"><strong>Por quê:</strong> sem diagnóstico real, a solução mais provável é a que já não funcionou antes. Aqui paramos de adivinhar.</p>
+          </div>
+        </div>
+        <div class="phase-panel" data-phase="2">
+          <div class="phase-content">
+            <div class="phase-content-header">
+              <div class="phase-content-num">2</div>
+              <div>
+                <p class="phase-content-title">Mapeamento</p>
+                <p class="phase-content-sessions">Sessões 3–4 · 2 horas</p>
+              </div>
+            </div>
+            <p class="phase-content-desc">Priorizamos oportunidades com um scorecard Valor × Implementabilidade × Prontidão. Fechamos o Plano dos Próximos 30 Dias — 3 movimentos com inputs claros e métrica definida.</p>
+            <p class="phase-content-why"><strong>Por quê:</strong> nem toda oportunidade de IA vale seu tempo. Você precisa de critério, não de entusiasmo.</p>
+          </div>
+        </div>
+        <div class="phase-panel" data-phase="3">
+          <div class="phase-content">
+            <div class="phase-content-header">
+              <div class="phase-content-num">3</div>
+              <div>
+                <p class="phase-content-title">Construção</p>
+                <p class="phase-content-sessions">Sessões 5–6 · 2 horas</p>
+              </div>
+            </div>
+            <p class="phase-content-desc">Construímos juntos — você vê o raciocínio, não recebe pronto. A primeira solução de IA aplicada nos pontos críticos identificados. Pode ser um GPT afiado, um fluxo n8n, uma sequência de prompts.</p>
+            <p class="phase-content-why"><strong>Por quê:</strong> solução que você não entendeu é solução que você abandona em 3 semanas.</p>
+          </div>
+        </div>
+        <div class="phase-panel" data-phase="4">
+          <div class="phase-content">
+            <div class="phase-content-header">
+              <div class="phase-content-num">4</div>
+              <div>
+                <p class="phase-content-title">Implementação</p>
+                <p class="phase-content-sessions">Sessões 7–8 · 2 horas</p>
+              </div>
+            </div>
+            <p class="phase-content-desc">Medimos antes e depois: horas economizadas, tarefas removidas, novos workflows. Você sai com Diretrizes Pessoais de Uso Responsável e o Plano dos 30 Dias confirmado com dados reais.</p>
+            <p class="phase-content-why"><strong>Por quê:</strong> resultado sem métrica é história sem evidência. Você precisa de número para mostrar para seu gestor.</p>
+          </div>
+        </div>
+      </div>
+
+      <blockquote class="mechanism-quote reveal">
+        Aprendi IA sendo PMO — sem background técnico, cometendo os mesmos erros que você cometeria. Isso não é humildade de marketing. É por que esse programa funciona para gestor não-técnico.
+        <cite>Rafael Lima</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ─── SOBRE RAFAEL ──────────────────────────────────────── -->
+  <section>
+    <div class="container">
+      <p class="label reveal">Quem vai te acompanhar</p>
+      <h2 class="sec-title reveal">Rafael Lima</h2>
+
+      <div class="about-card reveal">
+        <div class="about-header">
+          <div class="about-avatar">RL</div>
+          <div>
+            <p class="about-name">Rafael Lima</p>
+            <p class="about-role">PM · Consultor de IA · Professor IEL-CE · Co-fundador BumpAI · Fortaleza, BR</p>
+          </div>
+        </div>
+
+        <div class="about-stats">
+          <div class="about-stat">
+            <div class="about-stat-value">+600</div>
+            <div class="about-stat-label">profissionais capacitados</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-value">R$5M</div>
+            <div class="about-stat-label">receita incremental gerada</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-value">2.300h</div>
+            <div class="about-stat-label">economizadas/ano em projetos</div>
+          </div>
+        </div>
+
+        <div class="about-body">
+          <p>Não sou desenvolvedor. Sou Engenheiro pela UFC que virou Product Manager, PMO de CoE de RPA e gestor de portfólio — e aprendeu IA generativa inteiramente na prática, sem background técnico. Cometi os erros que os tutoriais não ensinam a evitar. Esse é exatamente o meu diferencial.</p>
+          <p>Em 10 anos na interseção entre gestão, produto e tecnologia, gerei impacto mensurável: <strong>+R$ 5M em receita</strong>, <strong>+2.300h/ano economizadas</strong> em automação de processos, e <strong>redução de 1.300 horas mensais</strong> na jornada de venda da Bemol Digital — com IA e microsserviços. Hoje aplico a mesma lógica como PM na iRede e no BumpAI, empresa de automação para PMEs que co-fundo.</p>
+          <p>Como Professor de IA Generativa no IEL-CE e consultor da Collaborative, já capacitei <strong>+600 profissionais</strong> em gestão com IA — de coordenadores a diretores, de PMEs a grandes empresas. Visitei a sede da NVIDIA Brasil e participei do AWS Summit SP 2025: não para colecionar evento, mas porque preciso estar dentro do campo para ensinar o que está funcionando agora.</p>
+        </div>
+
+        <div class="about-links">
+          <a href="https://www.linkedin.com/in/rslimaeng/" target="_blank" rel="noopener" class="about-link">LinkedIn ↗</a>
+          <a href="https://instagram.com/iacomrafael" target="_blank" rel="noopener" class="about-link">@iacomrafael ↗</a>
+        </div>
+
+        <div class="about-credentials">
+          <span class="cred-badge">Professor IEL-CE</span>
+          <span class="cred-badge">Co-fundador BumpAI</span>
+          <span class="cred-badge">PM iRede · ex-Bemol Digital</span>
+          <span class="cred-badge">Consultor Collaborative</span>
+          <span class="cred-badge">+50 processos automatizados</span>
+          <span class="cred-badge">Engenheiro UFC · MBA Finanças</span>
+          <span class="cred-badge">Certificado Anthropic</span>
+          <span class="cred-badge">NVIDIA BR · AWS Summit SP 2025</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ─── ENTREGÁVEIS ───────────────────────────────────────── -->
+  <section>
+    <div class="container">
+      <p class="label reveal">O que você sai com</p>
+      <h2 class="sec-title reveal">7 entregas concretas + 1 bônus</h2>
+      <p class="sec-desc reveal">Co-construídos sessão a sessão. Não é kit pronto — é o que VOCÊ produziu durante o programa.</p>
+
+      <div class="deliverables reveal">
+        <div class="dlv-item">
+          <div class="dlv-num">1</div>
+          <p class="dlv-title">Diagnóstico 5D — mapa real do seu ponto de partida</p>
+          <p class="dlv-desc">Análise do seu papel em 5 dimensões: <strong>dados</strong> (o que você gera e consome), <strong>tecnologia</strong> (o que já usa), <strong>pessoas</strong> (quem depende de você), <strong>processos</strong> (o que é repetitivo e custoso) e <strong>governança</strong> (o que pode ou não pode entrar na IA). Resultado: um mapa escrito do que você consegue e não consegue fazer com IA hoje — com os gaps priorizados.</p>
+          <span class="dlv-shift">De "acho que tenho potencial com IA" para "sei exatamente onde e por quê".</span>
+        </div>
+        <div class="dlv-item">
+          <div class="dlv-num">2</div>
+          <p class="dlv-title">Mapa de Oportunidades com scorecard VIP</p>
+          <p class="dlv-desc">Toda oportunidade de IA da sua rotina avaliada por 3 critérios: <strong>Valor</strong> (quanto impacta na prática), <strong>Implementabilidade</strong> (quanto esforço exige) e <strong>Prontidão</strong> (você tem as condições para executar agora). O Mapa é "vivo" — cresce com você ao longo das sessões, não congela na sessão 3.</p>
+          <span class="dlv-shift">De "tudo pode ser automatizado" para "isso aqui vale, aquilo ali espera".</span>
+        </div>
+        <div class="dlv-item">
+          <div class="dlv-num">3</div>
+          <p class="dlv-title">Plano dos Próximos 30 Dias</p>
+          <p class="dlv-desc">3 movimentos concretos: cada um com input claro (o que você precisa fazer), ferramenta definida (qual IA ou automação), métrica simples (como vai saber que funcionou) e marco de revisão (quando verificar). Fechado na sessão 4 com dados do diagnóstico real — não com suposição.</p>
+          <span class="dlv-shift">De "vou tentar usar mais IA" para "segunda-feira faço isso, com esse prompt, nessa ferramenta".</span>
+        </div>
+        <div class="dlv-item">
+          <div class="dlv-num">4</div>
+          <p class="dlv-title">Solução de IA funcionando na sua rotina</p>
+          <p class="dlv-desc">Construída nas sessões 5 e 6 — você vê o raciocínio, não recebe pronto. O formato depende do seu contexto: pode ser um GPT customizado com instruções específicas do seu papel, um conjunto de 3–5 prompts encadeados para um processo recorrente, ou um fluxo n8n automatizando uma tarefa repetitiva. Você aprende a replicar a lógica — não só o resultado.</p>
+          <span class="dlv-shift">De "no demo funciona, no meu dia trava" para "construí eu mesmo, sei onde mexer".</span>
+        </div>
+        <div class="dlv-item">
+          <div class="dlv-num">5</div>
+          <p class="dlv-title">Diretrizes Pessoais de Uso Responsável</p>
+          <p class="dlv-desc">1 página operacional com 4 blocos: <strong>dados sensíveis</strong> (o que nunca entra na IA), <strong>validação humana</strong> (o que precisa de revisão antes de sair), <strong>voz autoral</strong> (como manter sua identidade no output da IA) e <strong>citação e transparência</strong> (quando e como declarar uso de IA). Serve para você e para orientar sua equipe.</p>
+          <span class="dlv-shift">De "improviso com dado da empresa" para "tenho política clara antes de mandar qualquer coisa".</span>
+        </div>
+        <div class="dlv-item">
+          <div class="dlv-num">6</div>
+          <p class="dlv-title">Relatório de Adoção Pré/Pós com métricas reais</p>
+          <p class="dlv-desc">Comparação objetiva entre o seu ponto de partida (sessão 1) e o estado final (sessão 8): horas economizadas por semana, tarefas que saíram da sua rotina, novos workflows que entraram, qualidade percebida dos outputs. O Relatório usa as 5 tarefas-baseline definidas no Diagnóstico — números que você pode mostrar para o seu gestor.</p>
+          <span class="dlv-shift">De "acho que melhorou" para "economizei X horas/semana, aqui está a evidência".</span>
+        </div>
+        <div class="dlv-item">
+          <div class="dlv-num">7</div>
+          <p class="dlv-title">Biblioteca Pessoal de Prompts e Skills</p>
+          <p class="dlv-desc">Tudo que você construiu durante o programa, organizado para usar autonomamente: prompts testados nos seus casos reais, estruturas de instrução para seus GPTs, checkpoints de validação de output, e as notas de raciocínio de cada decisão — para você poder adaptar, não só copiar.</p>
+          <span class="dlv-shift">De "dependo de tutorial para cada coisa nova" para "tenho um sistema que eu mesmo consigo expandir".</span>
+        </div>
+        <div class="dlv-item dlv-bonus">
+          <div class="dlv-num">+</div>
+          <span class="dlv-bonus-label">Bônus · Incluso no programa</span>
+          <p class="dlv-title">Check-in 30 dias pós-programa</p>
+          <p class="dlv-desc">30 minutos de sessão 30 dias após a sessão 8, para revisitar o Plano dos 30 Dias com dados reais de uso. O que funcionou, o que ajustar, o que vem a seguir. Sem custo adicional — é parte do compromisso.</p>
+          <span class="dlv-shift">O acompanhamento não termina na última sessão. Termina quando o resultado está consolidado.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ─── QUALIFICAÇÃO ──────────────────────────────────────── -->
+  <section>
+    <div class="container">
+      <p class="label reveal">Para quem é</p>
+      <h2 class="sec-title reveal">Este programa é para você?</h2>
+      <p class="sec-desc reveal">Leia com atenção. Não faz sentido vender para quem não vai se beneficiar — e prefiro 5 clientes com resultado a 20 sem.</p>
+
+      <div class="qual-grid reveal">
+        <div class="qual-card yes">
+          <p class="qual-header">✓ É para você se...</p>
+          <ul class="qual-list">
+            <li>Você é gestor, coordenador ou head de área (qualquer setor)</li>
+            <li>Já tentou aplicar IA e ficou preso no uso genérico</li>
+            <li>Pode investir 2h/semana entre as sessões para aplicar</li>
+            <li>Quer resultado mensurável — não mais conteúdo sobre IA</li>
+          </ul>
+        </div>
+        <div class="qual-card no">
+          <p class="qual-header">× Não é para você se...</p>
+          <ul class="qual-list">
+            <li>Quer aprender a programar com IA — há cursos de dev para isso</li>
+            <li>Precisa de roadmap estratégico para a empresa — recomendo consultoria B2B</li>
+            <li>Quer kit de prompts pronto — mini-cursos resolvem isso por R$47–197</li>
+            <li>Não consegue 2h/semana — o programa não funciona sem implementação</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="qual-note reveal">
+        "Não estou tentando convencer você. Estou tentando garantir que, se entrar, vai sair com resultado."
+      </p>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ─── OFERTA ─────────────────────────────────────────────── -->
+  <section>
+    <div class="container">
+      <p class="label reveal">Investimento</p>
+      <h2 class="sec-title reveal">Um programa com garantia embutida no modelo</h2>
+      <p class="sec-desc reveal">O modelo de pagamento não é uma política comercial. É como eu demonstro que tenho pele no jogo.</p>
+
+      <div class="value-stack reveal">
+        <div class="vs-header">O que está incluído</div>
+        <div class="vs-row"><span class="vs-check">✓</span><span class="vs-label">Diagnóstico 5D personalizado da sua rotina</span><span class="vs-value">R$ 800</span></div>
+        <div class="vs-row"><span class="vs-check">✓</span><span class="vs-label">Mapa de Oportunidades VIVO com scorecard VIP</span><span class="vs-value">R$ 600</span></div>
+        <div class="vs-row"><span class="vs-check">✓</span><span class="vs-label">Plano dos 30 Dias estruturado e fechado</span><span class="vs-value">R$ 400</span></div>
+        <div class="vs-row"><span class="vs-check">✓</span><span class="vs-label">4 sessões de construção lado a lado (sessões 5–8)</span><span class="vs-value">R$ 1.600</span></div>
+        <div class="vs-row"><span class="vs-check">✓</span><span class="vs-label">Diretrizes de uso responsável personalizadas</span><span class="vs-value">R$ 300</span></div>
+        <div class="vs-row"><span class="vs-check">✓</span><span class="vs-label">Relatório de Adoção pré/pós com métricas reais</span><span class="vs-value">R$ 400</span></div>
+        <div class="vs-row"><span class="vs-check">✓</span><span class="vs-label">Biblioteca pessoal de prompts e skills co-criada</span><span class="vs-value">incluso</span></div>
+        <div class="vs-row"><span class="vs-check">✓</span><span class="vs-label">Check-in 30 dias pós-programa (30 min)</span><span class="vs-value">R$ 250</span></div>
+        <div class="vs-total"><span>Valor avulso estimado</span><span class="vs-total-value">R$ 4.350+</span></div>
+      </div>
+
+      <div class="price-block reveal">
+        <p class="price-label">Investimento pelo programa completo</p>
+        <p class="price-main"><sup>R$</sup>4.000</p>
+        <p class="price-note">16 horas de trabalho 1:1 estruturado com metodologia, entregáveis e acompanhamento.</p>
+        <p class="price-note" style="margin-top:6px;color:var(--text-muted);font-size:13px">Equivale a 4 consultas de especialista + 1 curso personalizado + sistema de gestão da mudança.</p>
+        <div class="price-pix">✓ Forma preferida: 2× R$ 2.000 no Pix — 50% para começar · 50% após a sessão 4</div>
+      </div>
+
+      <div class="guarantee-hero reveal">
+        <span class="guarantee-hero-badge">Skin in the Game · Garantia natural</span>
+        <h3 class="guarantee-hero-title">Você só paga a segunda metade se sentir que avançou.</h3>
+        <p class="guarantee-hero-body">O pagamento em 2 parcelas não é só praticidade. É o modelo de garantia do programa: se ao fim da sessão 4 a mentoria não estiver entregando o que combinamos, você simplesmente não paga o restante.</p>
+        <p class="guarantee-hero-body">Sem fricção. Sem julgamento subjetivo. Sem cláusula difícil. Eu só ganho completamente se você ganhar primeiro.</p>
+      </div>
+
+      <div class="cta-block">
+        <a href="SEU_LINK_WHATSAPP" class="btn-cta btn-cta-full reveal">
+          <span class="btn-cta-text">Solicitar disponibilidade de agenda</span>
+          <span class="btn-cta-arrow">→</span>
+        </a>
+        <p class="cta-sub reveal">Agenda limitada · Atendimento em Fortaleza (presencial ou remoto) e 100% remoto para outras cidades<br>Dúvidas antes de decidir? É só mandar mensagem — a conversa é honesta.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ─── FAQ ───────────────────────────────────────────────── -->
+  <section>
+    <div class="container">
+      <p class="label reveal">Dúvidas</p>
+      <h2 class="sec-title reveal">Perguntas frequentes</h2>
+      <p class="sec-desc reveal" style="margin-bottom:28px">As perguntas que aparecem mais — respondidas com honestidade.</p>
+
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <button class="faq-question"><span class="faq-num">01</span>Minha empresa tem restrições de dados. Posso participar?<span class="faq-chevron">⌄</span></button>
+          <div class="faq-answer-wrap"><div class="faq-answer-inner"><div class="faq-answer">Sim — e isso é exatamente por que temos a sessão de Diretrizes de Uso Responsável. Trabalhamos primeiro com o mapeamento do seu fluxo de trabalho público, e você define o que entra e o que não entra nas sessões. <strong>A maioria dos ganhos de IA na rotina de gestores não exige dado sensível — exige método.</strong></div></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question"><span class="faq-num">02</span>Preciso saber programar?<span class="faq-chevron">⌄</span></button>
+          <div class="faq-answer-wrap"><div class="faq-answer-inner"><div class="faq-answer">Não. Aprendi IA sendo PMO sem background técnico. O programa funciona com as ferramentas que você já usa — ou com alternativas no-code que não exigem linha de código. Se aparecer algo técnico além do seu conforto, adapto o caminho — sem perder o resultado.</div></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question"><span class="faq-num">03</span>Já fiz curso de IA e não saiu nada da rotina. Por que seria diferente?<span class="faq-chevron">⌄</span></button>
+          <div class="faq-answer-wrap"><div class="faq-answer-inner"><div class="faq-answer">Cursos ensinam a ferramenta. Este programa parte do diagnóstico da SUA rotina. A diferença é a mesma entre academia genérica e personal trainer que avalia você primeiro. <strong>Um funciona para a média. O outro funciona para você.</strong></div></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question"><span class="faq-num">04</span>Qual é o compromisso de tempo semanal?<span class="faq-chevron">⌄</span></button>
+          <div class="faq-answer-wrap"><div class="faq-answer-inner"><div class="faq-answer">2 horas por semana: 1 hora de sessão + 1 hora de aplicação entre os encontros. <strong>Se você não consegue esse tempo agora, o programa não vai funcionar e prefiro que você espere o momento certo.</strong> É melhor ser honesto sobre isso antes de começar.</div></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question"><span class="faq-num">05</span>Posso incluir minha equipe no programa?<span class="faq-chevron">⌄</span></button>
+          <div class="faq-answer-wrap"><div class="faq-answer-inner"><div class="faq-answer">Depende do momento. O programa começa com você — diagnóstico individual e clareza do seu papel como gestor. Depois da sessão 4, avaliamos juntos se faz sentido trazer algum movimento de equipe. Muitos clientes optam por isso na segunda fase — quando já têm método próprio para ensinar.</div></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question"><span class="faq-num">06</span>O que acontece se eu não ficar satisfeito até a sessão 4?<span class="faq-chevron">⌄</span></button>
+          <div class="faq-answer-wrap"><div class="faq-answer-inner"><div class="faq-answer">Simples: você não paga a segunda parcela. O modelo de pagamento (50% ao começar + 50% após a sessão 4) existe exatamente para isso. Se na sessão 4 o programa não estiver entregando o que combinamos, o acordo encerra. <strong>Sem conversa difícil. Sem condição escondida. Sem julgamento.</strong></div></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question"><span class="faq-num">07</span>Quanto tempo tenho para ver resultado?<span class="faq-chevron">⌄</span></button>
+          <div class="faq-answer-wrap"><div class="faq-answer-inner"><div class="faq-answer">A primeira solução funcionando na sua rotina aparece nas sessões 5–6 (semana 5–6 do programa). Resultado mensurável — com Relatório de Adoção pré/pós — ao final das 8 semanas. O check-in 30 dias depois confirma o impacto com dados reais de uso.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ─── FECHAMENTO ────────────────────────────────────────── -->
+  <section class="closing">
+    <div class="container">
+      <h2 class="closing-title reveal">Você está a 8 semanas<br>de ter um método.</h2>
+
+      <p class="closing-body reveal">A maioria dos gestores vai continuar usando IA da mesma forma: testando aqui, vendo tutorial ali, tentando aplicar sozinho. Alguns vão avançar. A maioria vai continuar no mesmo lugar daqui a 6 meses.</p>
+
+      <p class="closing-body reveal">Este programa é para quem decidiu que tentativa-e-erro não é mais suficiente. Que quer método, entregáveis reais, e um resultado que possa mostrar.</p>
+
+      <blockquote class="closing-identity reveal">
+        "Em 8 semanas você passa de <em>tento usar IA</em> para <em>tenho IA rodando na minha rotina — e sei medir.</em>"
+      </blockquote>
+
+      <a href="SEU_LINK_WHATSAPP" class="btn-cta reveal">
+        <span class="btn-cta-text">Solicitar disponibilidade de agenda</span>
+        <span class="btn-cta-arrow">→</span>
+      </a>
+
+      <p class="closing-final-note reveal">Se você chegou até aqui e ainda tem dúvida, é provável que a dúvida seja sobre o momento — não sobre o programa. Me chama. A gente conversa honesto.</p>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ────────────────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <p class="footer-brand">IA na <em>Prática</em> · Rafael Lima</p>
+      <p>@iacomrafael · Fortaleza, BR<br>
+      Dúvidas? Fale comigo no <a href="SEU_LINK_WHATSAPP">WhatsApp</a> ou pelo <a href="https://instagram.com/iacomrafael">Instagram</a>.</p>
+    </div>
+  </footer>
+
+  <!-- ─── WHATSAPP FLOAT ────────────────────────────────────── -->
+  <a href="SEU_LINK_WHATSAPP" class="whatsapp-float" aria-label="Conversar no WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+  </a>
+
+  <!-- ─── SCRIPTS ───────────────────────────────────────────── -->
+  <script>
+    /* 1 — Sticky nav */
+    new IntersectionObserver(
+      ([e]) => document.getElementById('stickyTop').classList.toggle('visible', !e.isIntersecting),
+      { threshold: 0 }
+    ).observe(document.getElementById('hero'));
+
+    /* 2 — Scroll reveal */
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.07, rootMargin: '0px 0px -4% 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+
+    /* 3 — Pain cards */
+    var painN = 0;
+    function togglePain(card) {
+      var was = card.classList.contains('checked');
+      card.classList.toggle('checked');
+      var icon = card.querySelector('.pain-icon');
+      painN += was ? -1 : 1;
+      if (icon) icon.textContent = was ? '☐' : '✓';
+      document.getElementById('painCount').textContent = Math.max(0, painN);
+      document.getElementById('painCounter').classList.toggle('visible', painN > 0);
+    }
+
+    /* 4 — Phase tabs */
+    document.querySelectorAll('.phase-tab').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var t = btn.getAttribute('data-phase');
+        document.querySelectorAll('.phase-tab').forEach(function(b) { b.classList.remove('active'); });
+        document.querySelectorAll('.phase-panel').forEach(function(p) { p.classList.remove('active'); });
+        btn.classList.add('active');
+        var panel = document.querySelector('.phase-panel[data-phase="' + t + '"]');
+        if (panel) panel.classList.add('active');
+      });
+    });
+
+    /* 5 — FAQ accordion */
+    document.querySelectorAll('.faq-question').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var item = btn.closest('.faq-item');
+        var open = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(function(el) { el.classList.remove('open'); });
+        if (!open) item.classList.add('open');
+      });
+    });
+  </script>
+
+</body>
+</html>
