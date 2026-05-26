@@ -670,6 +670,13 @@
       font-variation-settings: 'opsz' 48;
       color: var(--cream-50);
     }
+    .vt-bonus-row td { color: var(--ocre) !important; }
+    .vt-bonus-row td.vt-check { color: var(--ocre); }
+    .vt-bonus-label {
+      display: block; font-size: 10px; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--ocre); opacity: .7; margin-bottom: 3px;
+    }
 
     .price-display {
       text-align: center;
@@ -922,7 +929,7 @@
         </div>
         <div class="hero-stat-block">
           <div class="hero-stat-value">4</div>
-          <div class="hero-stat-label">fases estruturadas</div>
+          <div class="hero-stat-label">bônus inclusos</div>
         </div>
         <div class="hero-stat-block">
           <div class="hero-stat-value">30d</div>
@@ -1056,39 +1063,39 @@
       <div class="section-header reveal">
         <div class="section-num">03 ·</div>
         <div>
-          <h2 class="section-title">4 fases. 16 horas. 1 método.</h2>
-          <p class="section-lead">Cada fase tem entregável definido. Você nunca sai de uma sessão sem saber o que aconteceu.</p>
+          <h2 class="section-title">16 horas. Ciclo contínuo. Entregáveis reais.</h2>
+          <p class="section-lead">Não existe script de sessões fixas. O ciclo se adapta ao seu ritmo — mas o entregável de cada momento é sempre claro.</p>
         </div>
       </div>
 
       <div class="phase-grid reveal">
         <div class="phase-item">
           <div class="num-large">01</div>
-          <div class="phase-sessions">Sessões 1–2 · 2 horas</div>
-          <p class="phase-title">Diagnóstico</p>
-          <p class="phase-desc">Mapeamos sua rotina em 5 dimensões: dados, tecnologia, pessoas, processos e governança. Estabelecemos um baseline mensurável de 5 tarefas para comparar pré e pós.</p>
-          <p class="phase-why"><strong>Por quê:</strong> sem diagnóstico real, a solução mais provável é a que já não funcionou antes. Aqui paramos de adivinhar.</p>
+          <div class="phase-sessions">Primeiras sessões · ~4h</div>
+          <p class="phase-title">Diagnóstico + Mapeamento</p>
+          <p class="phase-desc">Mapeamos sua rotina em 5 dimensões (dados, tecnologia, pessoas, processos, governança) e priorizamos oportunidades com scorecard VIP. Resultado: mapa real do seu ponto de partida e os movimentos que valem seu tempo.</p>
+          <p class="phase-why"><strong>Por quê:</strong> sem diagnóstico real, você vai resolver o problema errado com a ferramenta certa.</p>
         </div>
         <div class="phase-item">
           <div class="num-large">02</div>
-          <div class="phase-sessions">Sessões 3–4 · 2 horas</div>
-          <p class="phase-title">Mapeamento</p>
-          <p class="phase-desc">Priorizamos oportunidades com scorecard Valor × Implementabilidade × Prontidão. Fechamos o Plano dos Próximos 30 Dias — 3 movimentos com inputs claros e métrica definida.</p>
-          <p class="phase-why"><strong>Por quê:</strong> nem toda oportunidade de IA vale seu tempo. Você precisa de critério, não de entusiasmo.</p>
-        </div>
-        <div class="phase-item">
-          <div class="num-large">03</div>
-          <div class="phase-sessions">Sessões 5–6 · 2 horas</div>
-          <p class="phase-title">Construção</p>
-          <p class="phase-desc">Construímos juntos — você vê o raciocínio, não recebe pronto. A primeira solução de IA aplicada nos pontos críticos identificados: GPT customizado, fluxo n8n ou prompts encadeados.</p>
+          <div class="phase-sessions">Sessão seguinte</div>
+          <p class="phase-title">Primeira construção</p>
+          <p class="phase-desc">Com o mapa na mão, já começamos a construir. GPT customizado, prompts encadeados ou fluxo n8n — o formato depende do contexto. Você vê o raciocínio, não recebe pronto.</p>
           <p class="phase-why"><strong>Por quê:</strong> solução que você não entendeu é solução que você abandona em 3 semanas.</p>
         </div>
         <div class="phase-item">
+          <div class="num-large">03</div>
+          <div class="phase-sessions">Ciclo contínuo</div>
+          <p class="phase-title">Construir → Implantar → Refinar</p>
+          <p class="phase-desc">A partir daí é ciclo: constrói, usa no trabalho real, traz o resultado para a sessão seguinte, ajusta e avança. Você já tem coisas funcionando antes de fechar as primeiras horas do programa.</p>
+          <p class="phase-why"><strong>Por quê:</strong> resultado prático no processo é o que mantém a motivação — não promessa de resultado futuro.</p>
+        </div>
+        <div class="phase-item">
           <div class="num-large">04</div>
-          <div class="phase-sessions">Sessões 7–8 · 2 horas</div>
-          <p class="phase-title">Implementação</p>
-          <p class="phase-desc">Medimos antes e depois: horas economizadas, tarefas removidas, novos workflows. Você sai com Diretrizes Pessoais de Uso Responsável e o Relatório de Adoção com dados reais.</p>
-          <p class="phase-why"><strong>Por quê:</strong> resultado sem métrica é história sem evidência. Você precisa de número para mostrar para seu gestor.</p>
+          <div class="phase-sessions">Sessões finais</div>
+          <p class="phase-title">Medir e avançar</p>
+          <p class="phase-desc">Fechamos o Relatório de Adoção com dados reais (pré vs. pós), consolidamos as Diretrizes de Uso Responsável e planejamos as próximas oportunidades — para você continuar sozinho com método.</p>
+          <p class="phase-why"><strong>Por quê:</strong> resultado sem métrica é história. Você sai com número para mostrar — e sistema para continuar.</p>
         </div>
       </div>
     </div>
@@ -1161,7 +1168,7 @@
       <div class="section-header reveal">
         <div class="section-num">05 ·</div>
         <div>
-          <h2 class="section-title">7 entregas concretas + 1 bônus</h2>
+          <h2 class="section-title">7 entregas concretas + 4 bônus</h2>
           <p class="section-lead">Co-construídos sessão a sessão. Não é kit pronto — é o que VOCÊ produziu durante o programa.</p>
         </div>
       </div>
@@ -1235,8 +1242,35 @@
             <td>
               <span class="dlv-bonus-label">Bônus · Incluso no programa</span>
               <span class="dlv-title">Check-in 30 dias pós-programa</span>
-              <span class="dlv-desc">30 minutos de sessão 30 dias após a sessão 8, para revisitar o Plano dos 30 Dias com dados reais de uso. O que funcionou, o que ajustar, o que vem a seguir. Sem custo adicional — é parte do compromisso.</span>
+              <span class="dlv-desc">Sessão de até 2h, 30 dias após o programa, para revisitar o Plano dos 30 Dias com dados reais de uso. O que funcionou, o que ajustar, o que vem a seguir. Nos 30 dias de intervalo, suporte assíncrono via WhatsApp — dúvidas respondidas em até 24h em dias úteis.</span>
               <span class="dlv-shift">O acompanhamento não termina na última sessão. Termina quando o resultado está consolidado.</span>
+            </td>
+          </tr>
+          <tr class="dlv-bonus-row">
+            <td>+</td>
+            <td>
+              <span class="dlv-bonus-label">Bônus · Incluso no programa</span>
+              <span class="dlv-title">Cofre Vivo — segundo cérebro com Claude Code</span>
+              <span class="dlv-desc">Obsidian configurado do zero com Claude Code: sistema de notas, memória de trabalho e organização de prompts prontos para usar. Na sessão Rafael mostra o dele no detalhe — como usa no dia a dia, o que funciona, o que ajustou. Avulso: R$ 197.</span>
+              <span class="dlv-shift">De "anoto em vários lugares e perco" para "tenho um sistema que pensa junto comigo".</span>
+            </td>
+          </tr>
+          <tr class="dlv-bonus-row">
+            <td>+</td>
+            <td>
+              <span class="dlv-bonus-label">Bônus · Incluso no programa</span>
+              <span class="dlv-title">Kit de Copilotos de IA</span>
+              <span class="dlv-desc">Templates de assistentes especializados prontos para adaptar: copilotos de gestão, análise, comunicação e processos. Podem virar Skills no Claude, GPTs personalizados ou assistentes Gemini — dependendo do que você usa.</span>
+              <span class="dlv-shift">De "começo do zero toda vez" para "pego o template, adapto ao meu contexto e uso".</span>
+            </td>
+          </tr>
+          <tr class="dlv-bonus-row">
+            <td>+</td>
+            <td>
+              <span class="dlv-bonus-label">Bônus · Incluso no programa</span>
+              <span class="dlv-title">Acervo de Cursos e Prompts</span>
+              <span class="dlv-desc">Material completo dos treinamentos de IA Generativa para Negócios: slides, prompts testados com centenas de profissionais, exercícios práticos e biblioteca de casos reais de uso em gestão.</span>
+              <span class="dlv-shift">De "conteúdo genérico que não encaixa na rotina" para "material que veio de quem aplicou antes de ensinar".</span>
             </td>
           </tr>
         </tbody>
@@ -1260,7 +1294,7 @@
         <div class="compare-col yes">
           <p class="compare-header">É para você se...</p>
           <ul class="compare-list">
-            <li>Você é gestor, coordenador ou head de área (qualquer setor)</li>
+            <li>Você trabalha com informação — reuniões, relatórios, análises, decisões — e quer IA funcionando na sua rotina real</li>
             <li>Já tentou aplicar IA e ficou preso no uso genérico</li>
             <li>Pode investir 2h/semana entre as sessões para aplicar</li>
             <li>Quer resultado mensurável — não mais conteúdo sobre IA</li>
@@ -1299,55 +1333,53 @@
         <thead>
           <tr>
             <th style="width:20px"></th>
-            <th>O que está incluído</th>
-            <th style="text-align:right">Valor avulso</th>
+            <th>O que está incluído no programa</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td class="vt-check">✓</td>
             <td>Diagnóstico 5D personalizado da sua rotina</td>
-            <td class="vt-val">R$ 800</td>
           </tr>
           <tr>
             <td class="vt-check">✓</td>
-            <td>Mapa de Oportunidades VIVO com scorecard VIP</td>
-            <td class="vt-val">R$ 600</td>
+            <td>Mapa de Oportunidades com scorecard VIP</td>
           </tr>
           <tr>
             <td class="vt-check">✓</td>
-            <td>Plano dos 30 Dias estruturado e fechado</td>
-            <td class="vt-val">R$ 400</td>
+            <td>Plano dos Próximos 30 Dias estruturado e fechado</td>
           </tr>
           <tr>
             <td class="vt-check">✓</td>
-            <td>4 sessões de construção lado a lado (sessões 5–8)</td>
-            <td class="vt-val">R$ 1.600</td>
+            <td>Sessões de construção lado a lado</td>
           </tr>
           <tr>
             <td class="vt-check">✓</td>
-            <td>Diretrizes de uso responsável personalizadas</td>
-            <td class="vt-val">R$ 300</td>
+            <td>Diretrizes Pessoais de Uso Responsável</td>
           </tr>
           <tr>
             <td class="vt-check">✓</td>
             <td>Relatório de Adoção pré/pós com métricas reais</td>
-            <td class="vt-val">R$ 400</td>
           </tr>
           <tr>
             <td class="vt-check">✓</td>
-            <td>Biblioteca pessoal de prompts e skills co-criada</td>
-            <td class="vt-val">incluso</td>
+            <td>Biblioteca Pessoal de Prompts e Skills co-criada</td>
           </tr>
-          <tr>
-            <td class="vt-check">✓</td>
-            <td>Check-in 30 dias pós-programa (30 min)</td>
-            <td class="vt-val">R$ 250</td>
+          <tr class="vt-bonus-row">
+            <td class="vt-check">+</td>
+            <td><span class="vt-bonus-label">Bônus · Incluso</span>Check-in 30 dias — até 2h de sessão + suporte assíncrono via WhatsApp durante os 30 dias</td>
           </tr>
-          <tr class="vt-total-row">
-            <td class="vt-check"></td>
-            <td>Valor avulso estimado</td>
-            <td class="vt-val">R$ 4.350+</td>
+          <tr class="vt-bonus-row">
+            <td class="vt-check">+</td>
+            <td><span class="vt-bonus-label">Bônus · Incluso</span>Cofre Vivo — segundo cérebro configurado com Obsidian + Claude Code</td>
+          </tr>
+          <tr class="vt-bonus-row">
+            <td class="vt-check">+</td>
+            <td><span class="vt-bonus-label">Bônus · Incluso</span>Kit de Copilotos de IA — templates de assistentes prontos para adaptar</td>
+          </tr>
+          <tr class="vt-bonus-row">
+            <td class="vt-check">+</td>
+            <td><span class="vt-bonus-label">Bônus · Incluso</span>Acervo de Cursos e Prompts — material dos treinamentos de IA para Negócios</td>
           </tr>
         </tbody>
       </table>
@@ -1414,6 +1446,16 @@
         <div class="faq-item">
           <button class="faq-question">
             <span class="faq-num">03</span>
+            Qual ferramenta de IA devo usar no programa?
+            <span class="faq-chevron">⌄</span>
+          </button>
+          <div class="faq-answer-wrap"><div class="faq-answer-inner">
+            <div class="faq-answer">O <strong>Claude</strong> (Anthropic) é a ferramenta que recomendo e uso nas sessões lado a lado. O plano Pro custa R$ 110/mês e é suficiente para tudo que construímos juntos. É possível seguir com ChatGPT ou Gemini — mas se você vai escolher uma ferramenta agora, começa com Claude.</div>
+          </div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span class="faq-num">04</span>
             Já fiz curso de IA e não saiu nada da rotina. Por que seria diferente?
             <span class="faq-chevron">⌄</span>
           </button>
@@ -1423,7 +1465,7 @@
         </div>
         <div class="faq-item">
           <button class="faq-question">
-            <span class="faq-num">04</span>
+            <span class="faq-num">05</span>
             Qual é o compromisso de tempo semanal?
             <span class="faq-chevron">⌄</span>
           </button>
@@ -1433,17 +1475,17 @@
         </div>
         <div class="faq-item">
           <button class="faq-question">
-            <span class="faq-num">05</span>
+            <span class="faq-num">06</span>
             Posso incluir minha equipe no programa?
             <span class="faq-chevron">⌄</span>
           </button>
           <div class="faq-answer-wrap"><div class="faq-answer-inner">
-            <div class="faq-answer">Depende do momento. O programa começa com você — diagnóstico individual e clareza do seu papel como gestor. Depois da sessão 4, avaliamos juntos se faz sentido trazer algum movimento de equipe. Muitos clientes optam por isso na segunda fase — quando já têm método próprio para ensinar.</div>
+            <div class="faq-answer">A mentoria é <strong>individual</strong> — o foco é na sua rotina, não na equipe. Durante o mapeamento, podemos conversar com outras pessoas do contexto para entender melhor o problema que você enfrenta. Mas o programa em si é 1:1. Se surgir necessidade de trabalhar com a equipe depois, isso vira um próximo passo — fora do escopo desta mentoria.</div>
           </div></div>
         </div>
         <div class="faq-item">
           <button class="faq-question">
-            <span class="faq-num">06</span>
+            <span class="faq-num">07</span>
             O que acontece se eu não ficar satisfeito até a sessão 4?
             <span class="faq-chevron">⌄</span>
           </button>
@@ -1453,12 +1495,12 @@
         </div>
         <div class="faq-item">
           <button class="faq-question">
-            <span class="faq-num">07</span>
+            <span class="faq-num">08</span>
             Quanto tempo tenho para ver resultado?
             <span class="faq-chevron">⌄</span>
           </button>
           <div class="faq-answer-wrap"><div class="faq-answer-inner">
-            <div class="faq-answer">A primeira solução funcionando na sua rotina aparece nas sessões 5–6 (semana 5–6 do programa). Resultado mensurável — com Relatório de Adoção pré/pós — ao final das 8 semanas. O check-in 30 dias depois confirma o impacto com dados reais de uso.</div>
+            <div class="faq-answer">O primeiro resultado prático já aparece <strong>no primeiro bloco</strong> — entre as sessões 3 e 4. Com diagnóstico e mapeamento feitos, a gente já começa a construir. A ideia é você ter algo funcionando antes de fechar as primeiras horas do programa. Resultado mensurável — com Relatório de Adoção pré/pós — ao final. O check-in 30 dias confirma o impacto com dados reais.</div>
           </div></div>
         </div>
       </div>
