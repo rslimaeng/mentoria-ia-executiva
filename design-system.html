@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System — Mentoria IA Executiva · Rafael Lima</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─────────────────────────────────────────────────────────────
+       DESIGN SYSTEM — Mentoria IA Executiva
+       Todos os tokens, tipografia, componentes e padrões da página.
+       Arquivo de referência para replicação e evolução.
+    ───────────────────────────────────────────────────────────── */
+
+    /* ── TOKENS (mesmos do index.html) ─────────────────────────── */
+    :root {
+      /* Cores de ação */
+      --coral:       #D97757;
+      --coral-dark:  #C9633E;
+      --coral-soft:  #F2D5C3;
+      /* Neutros */
+      --white:       #FFFFFF;
+      --cream-50:    #FAF7F2;
+      --cream-100:   #F5F1ED;
+      --cream-200:   #EBE6DD;
+      /* Fundos escuros */
+      --terra-900:   #2B1F17;
+      --terra-800:   #3A2A1F;
+      --terra-700:   #4A382C;
+      /* Utilitários */
+      --text-muted:  #8A8A8A;
+      --ocre:        #C9943A;
+      --ocre-soft:   #F0E2C2;
+      --success:     #6B8E4E;
+      --success-bg:  #E5EDD9;
+      /* Easing global */
+      --ease-spring: cubic-bezier(.16, 1, .3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter Tight', system-ui, sans-serif;
+      background: var(--cream-100);
+      color: var(--terra-900);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    strong { font-weight: 600; }
+
+    /* ── LAYOUT DO DESIGN SYSTEM ────────────────────────────────── */
+    .ds-container { max-width: 960px; margin: 0 auto; padding: 0 32px; }
+
+    .ds-hero {
+      background: var(--terra-900);
+      padding: 72px 0 56px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .ds-hero-label {
+      font-size: 10px; font-weight: 700; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--coral);
+      margin-bottom: 18px;
+    }
+    .ds-hero-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(32px, 5vw, 54px);
+      font-weight: 500;
+      font-variation-settings: 'opsz' 96, 'SOFT' 40;
+      line-height: 1.05; letter-spacing: -1px;
+      color: var(--cream-50);
+      margin-bottom: 14px;
+    }
+    .ds-hero-title em { font-style: italic; color: var(--coral); }
+    .ds-hero-sub {
+      font-size: 15px; color: rgba(255,255,255,.4);
+      max-width: 560px; line-height: 1.7;
+    }
+
+    /* Nav interna do design system */
+    .ds-nav {
+      background: var(--cream-50);
+      border-bottom: 1px solid var(--cream-200);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .ds-nav-inner {
+      display: flex; gap: 0;
+      overflow-x: auto;
+    }
+    .ds-nav-link {
+      font-size: 11px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--text-muted);
+      padding: 14px 20px; white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+    .ds-nav-link:hover { color: var(--coral); border-color: var(--coral); }
+
+    /* Seção de documentação */
+    .ds-section {
+      padding: 72px 0 56px;
+      border-bottom: 1px solid var(--cream-200);
+    }
+    .ds-section:last-child { border-bottom: none; }
+    .ds-section-title {
+      font-family: 'Fraunces', serif;
+      font-size: 28px; font-weight: 500;
+      font-variation-settings: 'opsz' 48, 'SOFT' 20;
+      color: var(--terra-900);
+      margin-bottom: 8px;
+    }
+    .ds-section-desc {
+      font-size: 14px; color: var(--text-muted);
+      margin-bottom: 48px; line-height: 1.65;
+    }
+    .ds-subsection { margin-bottom: 52px; }
+    .ds-subsection-label {
+      font-size: 10px; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--text-muted);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--cream-200);
+    }
+
+    /* Código inline */
+    .ds-code {
+      font-family: 'Courier New', monospace;
+      font-size: 12px; background: var(--cream-200);
+      color: var(--terra-700);
+      padding: 2px 6px; border-radius: 2px;
+    }
+    .ds-code-block {
+      background: var(--terra-900);
+      color: rgba(255,255,255,.75);
+      font-family: 'Courier New', monospace;
+      font-size: 12px; line-height: 1.75;
+      padding: 20px 24px;
+      margin-top: 16px;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .ds-code-block .kw { color: var(--coral); }
+    .ds-code-block .val { color: #8fb872; }
+    .ds-code-block .cm { color: rgba(255,255,255,.25); }
+
+    /* Preview container */
+    .ds-preview {
+      background: var(--cream-50);
+      border: 1px solid var(--cream-200);
+      padding: 40px 32px;
+      margin-bottom: 8px;
+    }
+    .ds-preview-dark {
+      background: var(--terra-900);
+      border: 1px solid rgba(255,255,255,.07);
+      padding: 40px 32px;
+      margin-bottom: 8px;
+    }
+    .ds-preview-label {
+      font-size: 10px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    /* Grid de exemplos */
+    .ds-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .ds-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+    @media (max-width: 640px) {
+      .ds-grid-2, .ds-grid-3 { grid-template-columns: 1fr; }
+    }
+
+    /* ── TODOS OS COMPONENTES DA PÁGINA (copiar para index.html) ── */
+
+    /* BTN-CTA (arrow-circle) */
+    .btn-cta {
+      display: inline-flex; align-items: center;
+      background: var(--coral); padding: 5px 5px 5px 24px;
+      text-decoration: none; cursor: pointer; border: none;
+      transition: background .4s var(--ease-spring),
+                  transform .4s var(--ease-spring),
+                  box-shadow .4s var(--ease-spring);
+    }
+    .btn-cta:hover {
+      background: var(--coral-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(217,119,87,.35);
+    }
+    .btn-cta-text {
+      color: #fff; font-family: 'Inter Tight', sans-serif;
+      font-size: 13px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .05em;
+      white-space: nowrap; margin-right: 14px;
+    }
+    .btn-cta-arrow {
+      width: 50px; height: 50px; background: var(--terra-900);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 20px; color: white; flex-shrink: 0;
+      transition: transform .4s var(--ease-spring); line-height: 1;
+    }
+    .btn-cta:hover .btn-cta-arrow { transform: rotate(-45deg); }
+    .btn-cta-sm { padding: 3px 3px 3px 16px; }
+    .btn-cta-sm .btn-cta-text { font-size: 11px; margin-right: 10px; }
+    .btn-cta-sm .btn-cta-arrow { width: 36px; height: 36px; font-size: 15px; }
+    .btn-cta-full { width: 100%; justify-content: space-between; }
+
+    /* BTN-CTA-LIGHT (variante dark sections) */
+    .btn-cta-light {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.25);
+    }
+    .btn-cta-light .btn-cta-text { color: var(--cream-50); }
+    .btn-cta-light .btn-cta-arrow { background: var(--coral); }
+    .btn-cta-light:hover { background: rgba(255,255,255,.05); box-shadow: none; transform: translateY(-2px); }
+
+    /* CARD-FRAME (L-corner coral accent) */
+    .card-frame {
+      background: var(--cream-50);
+      border: 1px solid var(--cream-200);
+      padding: 32px; position: relative;
+    }
+    .card-frame::before {
+      content: ''; position: absolute; top: -1px; left: -1px;
+      width: 28px; height: 1px; background: var(--coral);
+    }
+    .card-frame::after {
+      content: ''; position: absolute; top: -1px; left: -1px;
+      width: 1px; height: 28px; background: var(--coral);
+    }
+
+    /* SECTION-HEADER (padrão numérico Hibra) */
+    .section-header {
+      display: grid; grid-template-columns: 120px 1fr;
+      gap: 44px; margin-bottom: 60px; align-items: start;
+    }
+    .section-num {
+      font-size: 11px; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--coral); padding-top: 7px;
+    }
+    .section-num::after {
+      content: ''; display: block; width: 100%; height: 1px;
+      background: var(--coral); opacity: .25; margin-top: 12px;
+    }
+    .section-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(28px, 4.5vw, 46px); font-weight: 500;
+      font-variation-settings: 'opsz' 72, 'SOFT' 30;
+      line-height: 1.08; letter-spacing: -.5px;
+      color: var(--terra-900); margin-bottom: 14px;
+    }
+    .section-lead { font-size: 17px; color: var(--terra-700); line-height: 1.7; }
+
+    /* NUM-LARGE (número display para fases) */
+    .num-large {
+      font-family: 'Fraunces', serif; font-weight: 500; font-size: 52px;
+      line-height: 1; color: var(--coral);
+      font-variation-settings: 'opsz' 96, 'SOFT' 0;
+      letter-spacing: -.03em; margin-bottom: 20px;
+    }
+
+    /* BLOCKQUOTE EDITORIAL */
+    .blockquote-editorial { border-left: 2px solid var(--coral); padding-left: 28px; }
+    .blockquote-editorial p {
+      font-family: 'Fraunces', serif; font-style: italic; font-weight: 400;
+      font-variation-settings: 'opsz' 72, 'SOFT' 80;
+      font-size: clamp(17px, 2.5vw, 22px);
+      color: var(--terra-700); line-height: 1.55;
+    }
+    .blockquote-editorial cite {
+      display: block; margin-top: 14px; font-style: normal;
+      font-size: 13px; font-family: 'Inter Tight', sans-serif; color: var(--text-muted);
+    }
+
+    /* PAIN CARD (interativo) */
+    .pain-list { display: flex; flex-direction: column; gap: 6px; }
+    .pain-card {
+      background: var(--white); border: 1px solid var(--cream-200);
+      padding: 16px 22px 16px 56px; font-size: 15px; color: var(--terra-700);
+      line-height: 1.55; position: relative; cursor: pointer; user-select: none;
+      transition: background .3s var(--ease-spring), border-color .3s var(--ease-spring), transform .2s var(--ease-spring);
+    }
+    .pain-card:hover { border-color: rgba(217,119,87,.3); transform: translateX(3px); }
+    .pain-card.checked { background: var(--coral-soft); border-color: rgba(201,99,62,.4); }
+    .pain-icon {
+      position: absolute; left: 16px; top: 15px;
+      width: 26px; height: 26px; border: 1px solid var(--cream-200);
+      background: var(--cream-50); display: flex; align-items: center;
+      justify-content: center; font-size: 13px; color: var(--text-muted);
+      transition: background .3s var(--ease-spring), border-color .3s var(--ease-spring), color .3s var(--ease-spring);
+    }
+    .pain-card.checked .pain-icon { background: var(--coral); border-color: var(--coral); color: white; }
+    /* Pain resolve (abre ao clicar) */
+    .pain-resolve { display: grid; grid-template-rows: 0fr; overflow: hidden; transition: grid-template-rows .45s var(--ease-spring); }
+    .pain-card.checked .pain-resolve { grid-template-rows: 1fr; }
+    .pain-resolve-inner { overflow: hidden; }
+    .pain-resolve-content { padding-top: 12px; margin-top: 10px; border-top: 1px solid rgba(201,99,62,.22); }
+    .pain-resolve-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--coral-dark); margin-bottom: 5px; }
+    .pain-resolve-body { font-size: 13px; color: var(--terra-700); line-height: 1.6; }
+
+    /* COUNTER DE PAIN CARDS */
+    .pain-counter {
+      overflow: hidden; max-height: 0; margin-bottom: 0; opacity: 0; pointer-events: none;
+      transition: max-height .5s var(--ease-spring), opacity .4s var(--ease-spring), margin-bottom .4s var(--ease-spring);
+    }
+    .pain-counter.visible { max-height: 160px; opacity: 1; pointer-events: auto; margin-bottom: 16px; }
+    .pain-counter-box { background: var(--coral-soft); border: 1px solid rgba(201,99,62,.3); padding: 20px 24px; text-align: center; }
+    .pain-counter-num {
+      font-family: 'Fraunces', serif; font-size: 48px; font-weight: 600;
+      font-variation-settings: 'opsz' 96, 'SOFT' 0;
+      color: var(--coral-dark); line-height: 1; margin-bottom: 6px;
+    }
+    .pain-counter-text { font-size: 15px; color: var(--terra-700); }
+
+    /* PHASE CARDS 2×2 */
+    .phase-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--cream-200);
+      border: 1px solid var(--cream-200);
+    }
+    .phase-item { background: var(--cream-50); padding: 32px; }
+    .phase-sessions { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--text-muted); margin-bottom: 4px; }
+    .phase-title { font-size: 16px; font-weight: 700; color: var(--terra-900); margin-bottom: 14px; letter-spacing: -.01em; }
+    .phase-desc { font-size: 14px; color: var(--terra-700); line-height: 1.65; margin-bottom: 14px; }
+    .phase-why { font-size: 13px; color: var(--text-muted); line-height: 1.55; padding-top: 14px; border-top: 1px solid var(--cream-200); }
+
+    /* TABLE FORMAL (entregas) */
+    table.formal { width: 100%; border-collapse: collapse; }
+    table.formal th { text-align: left; padding: 12px 16px 12px 0; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--text-muted); border-bottom: 1px solid var(--cream-200); }
+    table.formal th:first-child { width: 48px; }
+    table.formal td { padding: 22px 16px 22px 0; border-bottom: 1px solid var(--cream-200); vertical-align: top; font-size: 15px; color: var(--terra-700); }
+    table.formal td:first-child { color: var(--coral); font-size: 11px; font-weight: 700; letter-spacing: .08em; white-space: nowrap; padding-top: 26px; }
+    table.formal td strong { color: var(--terra-900); }
+    table.formal tr:last-child td { border-bottom: none; }
+    .dlv-title { display: block; font-weight: 600; color: var(--terra-900); margin-bottom: 6px; font-size: 15px; }
+    .dlv-desc { font-size: 14px; color: var(--terra-700); line-height: 1.6; }
+    .dlv-shift { display: block; margin-top: 10px; font-size: 13px; color: var(--coral-dark); font-weight: 500; }
+    .dlv-shift::before { content: '→ '; }
+
+    /* A×B COMPARISON */
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .compare-col { padding-left: 24px; }
+    .compare-col.yes { border-left: 2px solid var(--coral); }
+    .compare-col.no  { border-left: 2px solid var(--cream-200); }
+    .compare-header { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--cream-200); }
+    .compare-col.yes .compare-header { color: var(--success); }
+    .compare-col.no  .compare-header { color: var(--text-muted); }
+    .compare-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .compare-list li { font-size: 14px; color: var(--terra-700); line-height: 1.5; padding-left: 18px; position: relative; }
+    .compare-col.yes .compare-list li::before { content: '›'; position: absolute; left: 0; color: var(--coral); font-weight: 700; font-size: 16px; line-height: 1.2; }
+    .compare-col.no  .compare-list li::before { content: '·'; position: absolute; left: 0; color: var(--text-muted); font-weight: 700; font-size: 18px; line-height: 1; }
+
+    /* STATS BLOCKS */
+    .hero-stats-row {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid rgba(255,255,255,.1);
+    }
+    .hero-stat-block {
+      padding: 36px 0 36px 28px;
+      border-right: 1px solid rgba(255,255,255,.07);
+    }
+    .hero-stat-block:last-child { border-right: none; }
+    .hero-stat-value {
+      font-family: 'Fraunces', serif; font-size: clamp(24px, 3.5vw, 38px); font-weight: 500;
+      font-variation-settings: 'opsz' 48, 'SOFT' 0; line-height: 1; color: var(--cream-50); margin-bottom: 8px;
+    }
+    .hero-stat-label { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.3); }
+    .about-stats-row {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--cream-200);
+      border-bottom: 1px solid var(--cream-200);
+    }
+    .about-stat { padding: 20px 16px; border-right: 1px solid var(--cream-200); }
+    .about-stat:last-child { border-right: none; }
+    .about-stat-value { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 600; font-variation-settings: 'opsz' 48, 'SOFT' 0; color: var(--coral); line-height: 1; margin-bottom: 5px; }
+    .about-stat-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--text-muted); }
+
+    /* PRICE DISPLAY DARK */
+    .price-display-ds {
+      text-align: center; padding: 48px 0;
+      border-top: 1px solid rgba(255,255,255,.1);
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .price-label-dark { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 16px; }
+    .price-main-dark {
+      font-family: 'Fraunces', serif; font-size: clamp(56px, 12vw, 88px); font-weight: 500;
+      font-variation-settings: 'opsz' 96, 'SOFT' 0;
+      letter-spacing: -3px; line-height: 1; color: var(--cream-50); margin-bottom: 18px;
+    }
+    .price-main-dark sup { font-size: 30px; vertical-align: super; letter-spacing: 0; }
+    .price-note-dark { font-size: 15px; color: rgba(255,255,255,.45); line-height: 1.65; }
+    .price-pix-dark {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(107,142,78,.1); border: 1px solid rgba(107,142,78,.22);
+      padding: 10px 20px; font-size: 14px; font-weight: 600; color: #8fb872; margin-top: 18px;
+    }
+
+    /* GUARANTEE DARK */
+    .guarantee-dark { border-left: 2px solid var(--coral); padding-left: 28px; }
+    .guarantee-dark-label { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--coral); margin-bottom: 12px; }
+    .guarantee-dark-title {
+      font-family: 'Fraunces', serif; font-size: clamp(22px, 3vw, 30px); font-weight: 500;
+      font-variation-settings: 'opsz' 48, 'SOFT' 30; color: var(--cream-50); line-height: 1.22; margin-bottom: 14px;
+    }
+    .guarantee-dark-body { font-size: 15px; color: rgba(255,255,255,.5); line-height: 1.7; }
+
+    /* FAQ ACCORDION */
+    .faq-list { border-top: 1px solid var(--cream-200); }
+    .faq-item { border-bottom: 1px solid var(--cream-200); }
+    .faq-question {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; padding: 22px 0; font-family: 'Inter Tight', sans-serif;
+      font-size: 16px; font-weight: 600; color: var(--terra-900);
+      cursor: pointer; text-align: left; background: none; border: none; width: 100%;
+      transition: color .2s;
+    }
+    .faq-question:hover { color: var(--coral); }
+    .faq-chevron { font-size: 20px; line-height: 1; color: var(--text-muted); transition: transform .4s var(--ease-spring); flex-shrink: 0; }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+    .faq-answer-wrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s var(--ease-spring); overflow: hidden; }
+    .faq-item.open .faq-answer-wrap { grid-template-rows: 1fr; }
+    .faq-answer-inner { overflow: hidden; }
+    .faq-answer { padding: 0 0 22px; font-size: 15px; color: var(--terra-700); line-height: 1.75; }
+    .faq-answer strong { color: var(--terra-900); }
+
+    /* ABOUT PHOTO HEADER */
+    .about-header { display: flex; align-items: flex-start; gap: 22px; }
+    .about-photo { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid var(--coral-soft); flex-shrink: 0; }
+    .about-header-text { flex: 1; min-width: 0; }
+    .about-name { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 600; font-variation-settings: 'opsz' 48, 'SOFT' 20; color: var(--terra-900); margin-bottom: 3px; }
+    .about-role { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; }
+    .about-link { font-size: 13px; font-weight: 600; color: var(--coral-dark); border-bottom: 1px solid rgba(201,99,62,.3); padding-bottom: 1px; transition: color .2s, border-color .2s; }
+    .about-link:hover { color: var(--coral); border-color: var(--coral); }
+    .cred-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .cred-badge { background: var(--cream-100); border: 1px solid var(--cream-200); padding: 5px 12px; font-size: 12px; font-weight: 500; color: var(--terra-700); }
+
+    /* BONUS BADGE */
+    .dlv-bonus-label {
+      display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--ocre);
+      background: rgba(201,148,58,.15); border: 1px solid rgba(201,148,58,.3);
+      padding: 2px 7px; margin-bottom: 6px;
+    }
+
+    /* WHATSAPP FLOAT */
+    .whatsapp-float-ds {
+      width: 56px; height: 56px; background: #25D366; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: white; box-shadow: 0 4px 20px rgba(37,211,102,.4);
+    }
+
+    /* TOP STRIP */
+    .top-strip-ds {
+      background: var(--terra-800); color: rgba(255,255,255,.55);
+      font-size: 12px; letter-spacing: .08em; text-align: center; padding: 11px 24px;
+    }
+    .top-strip-ds strong { color: var(--coral); }
+
+    /* STICKY NAV specimen */
+    .sticky-specimen {
+      background: rgba(42,30,22,.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      padding: 10px 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .st-brand { font-family: 'Fraunces', serif; font-size: 14px; font-weight: 600; font-variation-settings: 'opsz' 96, 'SOFT' 30; color: var(--cream-50); }
+    .st-brand em { font-style: normal; color: var(--coral); }
+
+    /* SCROLL REVEAL */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s var(--ease-spring), transform .65s var(--ease-spring); }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* Utilitários do design system */
+    .ds-tag {
+      display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; padding: 3px 8px;
+      border: 1px solid var(--cream-200); color: var(--text-muted); margin-bottom: 12px;
+    }
+    .ds-spacer { height: 1px; background: var(--cream-200); margin: 32px 0; }
+    .ds-note { font-size: 13px; color: var(--text-muted); line-height: 1.65; margin-top: 12px; font-style: italic; }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV DO DESIGN SYSTEM ──────────────────────────────────── -->
+  <nav class="ds-nav">
+    <div class="ds-nav-inner">
+      <a href="#tokens"     class="ds-nav-link">Tokens</a>
+      <a href="#tipografia" class="ds-nav-link">Tipografia</a>
+      <a href="#botoes"     class="ds-nav-link">Botões</a>
+      <a href="#cards"      class="ds-nav-link">Cards</a>
+      <a href="#secoes"     class="ds-nav-link">Seções</a>
+      <a href="#pain"       class="ds-nav-link">Pain Cards</a>
+      <a href="#entregas"   class="ds-nav-link">Entregas</a>
+      <a href="#comparacao" class="ds-nav-link">Comparação</a>
+      <a href="#faq"        class="ds-nav-link">FAQ</a>
+      <a href="#dark"       class="ds-nav-link">Dark</a>
+      <a href="#stats"      class="ds-nav-link">Stats</a>
+      <a href="#padroes"    class="ds-nav-link">Padrões</a>
+    </div>
+  </nav>
+
+  <!-- ─── HERO DO DESIGN SYSTEM ────────────────────────────────── -->
+  <div class="ds-hero">
+    <div class="ds-container">
+      <p class="ds-hero-label">Design System · Mentoria IA Executiva · @iacomrafael</p>
+      <h1 class="ds-hero-title">Tokens, componentes e<br><em>padrões de composição.</em></h1>
+      <p class="ds-hero-sub">Referência completa para replicar e evoluir a página de vendas. Paleta coral/cream/terra · Fraunces variável · Inter Tight · patterns Hibra adaptados.</p>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       1. TOKENS
+  ═══════════════════════════════════════════════════════════════ -->
+  <section class="ds-section" id="tokens">
+    <div class="ds-container">
+      <h2 class="ds-section-title">Tokens</h2>
+      <p class="ds-section-desc">Variáveis CSS em <span class="ds-code">:root</span>. Nunca use hex diretamente no HTML — use sempre o token correspondente.</p>
+
+      <!-- Cores de ação -->
+      <div class="ds-subsection">
+        <p class="ds-subsection-label">Coral — cor primária de ação</p>
+        <div class="ds-grid-3">
+          <div>
+            <div style="height:64px; background:#D97757; margin-bottom:10px;"></div>
+            <div style="font-size:12px; font-weight:700; color:var(--terra-900);">--coral</div>
+            <div style="font-size:11px; color:var(--text-muted);">#D97757</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">Botões, destaques, accents, bordas de destaque</div>
+          </div>
+          <div>
+            <div style="height:64px; background:#C9633E; margin-bottom:10px;"></div>
+            <div style="font-size:12px; font-weight:700; color:var(--terra-900);">--coral-dark</div>
+            <div style="font-size:11px; color:var(--text-muted);">#C9633E</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">Hover de botão, links sobre, pain-resolve-label</div>
+          </div>
+          <div>
+            <div style="height:64px; background:#F2D5C3; margin-bottom:10px;"></div>
+            <div style="font-size:12px; font-weight:700; color:var(--terra-900);">--coral-soft</div>
+            <div style="font-size:11px; color:var(--text-muted);">#F2D5C3</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">Bg pain card checked, borda da foto do Rafael</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-spacer"></div>
+
+      <!-- Fundos cream -->
+      <div class="ds-subsection">
+        <p class="ds-subsection-label">Cream — superfícies claras</p>
+        <div class="ds-grid-3">
+          <div>
+            <div style="height:64px; background:#FAF7F2; border:1px solid var(--cream-200); margin-bottom:10px;"></div>
+            <div style="font-size:12px; font-weight:700;">--cream-50</div>
+            <div style="font-size:11px; color:var(--text-muted);">#FAF7F2</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">card-frame bg, sections alternadas, pain cards bg</div>
+          </div>
+          <div>
+            <div style="height:64px; background:#F5F1ED; border:1px solid var(--cream-200); margin-bottom:10px;"></div>
+            <div style="font-size:12px; font-weight:700;">--cream-100</div>
+            <div style="font-size:11px; color:var(--text-muted);">#F5F1ED</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">Fundo padrão da página (body background)</div>
+          </div>
+          <div>
+            <div style="height:64px; background:#EBE6DD; margin-bottom:10px;"></div>
+            <div style="font-size:12px; font-weight:700;">--cream-200</div>
+            <div style="font-size:11px; color:var(--text-muted);">#EBE6DD</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">Bordas de cards e separadores em seções claras</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-spacer"></div>
+
+      <!-- Terra escuros -->
+      <div class="ds-subsection">
+        <p class="ds-subsection-label">Terra — fundos escuros e texto</p>
+        <div class="ds-grid-3">
+          <div>
+            <div style="height:64px; background:#2B1F17; margin-bottom:10px;"></div>
+            <div style="font-size:12px; font-weight:700; color:var(--cream-50); background:var(--terra-900); padding:2px 6px; display:inline-block;">--terra-900</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:6px;">#2B1F17 · hero dark, investimento, fechamento, sticky nav</div>
+          </div>
+          <div>
+            <div style="height:64px; background:#3A2A1F; margin-bottom:10px;"></div>
+            <div style="font-size:12px; font-weight:700; color:var(--cream-50); background:var(--terra-800); padding:2px 6px; display:inline-block;">--terra-800</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:6px;">#3A2A1F · top strip bg, btn-cta-arrow bg</div>
+          </div>
+          <div>
+            <div style="height:64px; background:#4A382C; margin-bottom:10px;"></div>
+            <div style="font-size:12px; font-weight:700; color:var(--cream-50); background:var(--terra-700); padding:2px 6px; display:inline-block;">--terra-700</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:6px;">#4A382C · texto secundário em seções claras</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-spacer"></div>
+
+      <!-- Utilitários -->
+      <div class="ds-subsection">
+        <p class="ds-subsection-label">Utilitários</p>
+        <div class="ds-grid-3">
+          <div>
+            <div style="height:40px; background:#8A8A8A; margin-bottom:10px;"></div>
+            <div style="font-size:12px; font-weight:700;">--text-muted</div>
+            <div style="font-size:11px; color:var(--text-muted);">#8A8A8A · labels, eyebrows, texto terciário</div>
+          </div>
+          <div>
+            <div style="height:40px; background:#C9943A; margin-bottom:10px;"></div>
+            <div style="font-size:12px; font-weight:700;">--ocre</div>
+            <div style="font-size:11px; color:var(--text-muted);">#C9943A · linha de bônus na tabela de entregas</div>
+          </div>
+          <div>
+            <div style="height:40px; background:#6B8E4E; margin-bottom:10px;"></div>
+            <div style="font-size:12px; font-weight:700;">--success</div>
+            <div style="font-size:11px; color:var(--text-muted);">#6B8E4E · indicador disponível, lista "É para você"</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-spacer"></div>
+
+      <!-- Easing -->
+      <div class="ds-subsection">
+        <p class="ds-subsection-label">Easing</p>
+        <div style="background:var(--cream-50); border:1px solid var(--cream-200); padding:20px 24px; display:inline-block;">
+          <div style="font-size:13px; font-weight:700; margin-bottom:4px;">--ease-spring</div>
+          <div class="ds-code">cubic-bezier(.16, 1, .3, 1)</div>
+          <div style="font-size:12px; color:var(--text-muted); margin-top:8px; max-width:400px;">Usado em TODAS as transições: hover de botão, reveals, pain-resolve, FAQ accordion, sticky nav, pain-card translate. Nunca use <code>ease</code> ou <code>linear</code>.</div>
+        </div>
+      </div>
+
+      <div class="ds-code-block"><span class="cm">/* Cole no :root do novo HTML */</span>
+<span class="kw">:root</span> {
+  <span class="kw">--coral</span>:       <span class="val">#D97757</span>;
+  <span class="kw">--coral-dark</span>:  <span class="val">#C9633E</span>;
+  <span class="kw">--coral-soft</span>:  <span class="val">#F2D5C3</span>;
+  <span class="kw">--white</span>:       <span class="val">#FFFFFF</span>;
+  <span class="kw">--cream-50</span>:    <span class="val">#FAF7F2</span>;
+  <span class="kw">--cream-100</span>:   <span class="val">#F5F1ED</span>;
+  <span class="kw">--cream-200</span>:   <span class="val">#EBE6DD</span>;
+  <span class="kw">--terra-900</span>:   <span class="val">#2B1F17</span>;
+  <span class="kw">--terra-800</span>:   <span class="val">#3A2A1F</span>;
+  <span class="kw">--terra-700</span>:   <span class="val">#4A382C</span>;
+  <span class="kw">--text-muted</span>:  <span class="val">#8A8A8A</span>;
+  <span class="kw">--ocre</span>:        <span class="val">#C9943A</span>;
+  <span class="kw">--ocre-soft</span>:   <span class="val">#F0E2C2</span>;
+  <span class="kw">--success</span>:     <span class="val">#6B8E4E</span>;
+  <span class="kw">--ease-spring</span>: <span class="val">cubic-bezier(.16, 1, .3, 1)</span>;
+}</div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       2. TIPOGRAFIA
+  ═══════════════════════════════════════════════════════════════ -->
+  <section class="ds-section" id="tipografia">
+    <div class="ds-container">
+      <h2 class="ds-section-title">Tipografia</h2>
+      <p class="ds-section-desc">Dois typefaces. <strong>Fraunces</strong> para display (variável — controle de opsz e SOFT). <strong>Inter Tight</strong> para corpo, botões e labels.</p>
+
+      <div class="ds-subsection">
+        <p class="ds-subsection-label">Fraunces — display variável</p>
+
+        <div style="margin-bottom:28px; padding-bottom:28px; border-bottom:1px solid var(--cream-200);">
+          <div class="ds-tag">Hero H1 · clamp(44px, 8vw, 84px) · opsz 144 · SOFT 50 · LS -2.5px</div>
+          <div style="font-family:'Fraunces',serif; font-size:clamp(44px,8vw,72px); font-weight:500; font-variation-settings:'opsz' 144,'SOFT' 50; line-height:1.04; letter-spacing:-2.5px; color:var(--terra-900);">Pare de usar IA.<br>Comece a redesenhar<br><em style="color:var(--coral);">sua rotina com ela.</em></div>
+        </div>
+
+        <div style="margin-bottom:28px; padding-bottom:28px; border-bottom:1px solid var(--cream-200);">
+          <div class="ds-tag">Section H2 · clamp(28px, 4.5vw, 46px) · opsz 72 · SOFT 30 · LS -0.5px</div>
+          <div style="font-family:'Fraunces',serif; font-size:clamp(28px,4.5vw,46px); font-weight:500; font-variation-settings:'opsz' 72,'SOFT' 30; line-height:1.08; letter-spacing:-.5px; color:var(--terra-900);">Isso soa familiar?</div>
+        </div>
+
+        <div style="margin-bottom:28px; padding-bottom:28px; border-bottom:1px solid var(--cream-200);">
+          <div class="ds-tag">num-large · 52px · opsz 96 · SOFT 0 · LS -0.03em</div>
+          <div class="num-large">01</div>
+        </div>
+
+        <div style="margin-bottom:28px; padding-bottom:28px; border-bottom:1px solid var(--cream-200);">
+          <div class="ds-tag">Blockquote · clamp(17, 2.5vw, 22px) · opsz 72 · SOFT 80 · itálico</div>
+          <div style="font-family:'Fraunces',serif; font-style:italic; font-weight:400; font-variation-settings:'opsz' 72,'SOFT' 80; font-size:clamp(17px,2.5vw,22px); color:var(--terra-700); line-height:1.55;">É a ausência de diagnóstico. Ferramenta sem método vira brinquedo.</div>
+        </div>
+
+        <div style="margin-bottom:28px; padding-bottom:28px; border-bottom:1px solid var(--cream-200);">
+          <div class="ds-tag">Preço · clamp(56px, 12vw, 88px) · opsz 96 · SOFT 0 · LS -3px</div>
+          <div style="font-family:'Fraunces',serif; font-size:clamp(48px,10vw,72px); font-weight:500; font-variation-settings:'opsz' 96,'SOFT' 0; letter-spacing:-3px; line-height:1; color:var(--terra-900);"><sup style="font-size:28px; vertical-align:super;">R$</sup>4.000</div>
+        </div>
+
+        <div>
+          <div class="ds-tag">Sobre · 24px · opsz 48 · SOFT 20 · weight 600</div>
+          <div style="font-family:'Fraunces',serif; font-size:24px; font-weight:600; font-variation-settings:'opsz' 48,'SOFT' 20; color:var(--terra-900);">Rafael Lima</div>
+        </div>
+      </div>
+
+      <div class="ds-spacer"></div>
+
+      <div class="ds-subsection">
+        <p class="ds-subsection-label">Inter Tight — corpo, botões e labels</p>
+
+        <div style="margin-bottom:20px;">
+          <div class="ds-tag">Body Lead · 17px · weight 400</div>
+          <p style="font-size:17px; color:var(--terra-700); line-height:1.7; max-width:560px;">Um programa individual que parte do diagnóstico real da SUA rotina — não de template genérico — para ter IA aplicada em pontos críticos do seu trabalho, mensurável.</p>
+        </div>
+        <div style="margin-bottom:20px;">
+          <div class="ds-tag">Body · 15px · weight 400</div>
+          <p style="font-size:15px; color:var(--terra-700); line-height:1.65;">Texto de pain card, itens de lista, corpo de FAQ e texto de comparação. Tamanho padrão para conteúdo denso.</p>
+        </div>
+        <div style="margin-bottom:20px;">
+          <div class="ds-tag">Label Eyebrow · 11px · weight 700 · uppercase · LS .14em</div>
+          <div style="font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--coral);">01 · Isso soa familiar?</div>
+        </div>
+        <div style="margin-bottom:20px;">
+          <div class="ds-tag">Micro label · 10px · weight 700 · uppercase · LS .12em</div>
+          <div style="font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--text-muted);">Sessões 1–2 · 2 horas</div>
+        </div>
+        <div>
+          <div class="ds-tag">Button text · 13px · weight 700 · uppercase · LS .05em</div>
+          <div style="font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--coral);">Verificar disponibilidade de agenda</div>
+        </div>
+      </div>
+
+      <div class="ds-code-block"><span class="cm">/* Import de fontes — cole no head */</span>
+&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Fraunces:
+  ital,opsz,wght,SOFT@0,9..144,300..900,0..100;
+  1,9..144,300..900,0..100
+  &amp;family=Inter+Tight:wght@400;500;600;700
+  &amp;display=swap" rel="stylesheet"&gt;
+
+<span class="cm">/* Uso da Fraunces variável */</span>
+<span class="kw">font-family</span>: <span class="val">'Fraunces', Georgia, serif</span>;
+<span class="kw">font-variation-settings</span>: <span class="val">'opsz'</span> 144, <span class="val">'SOFT'</span> 50; <span class="cm">/* hero */</span>
+<span class="kw">font-variation-settings</span>: <span class="val">'opsz'</span> 72,  <span class="val">'SOFT'</span> 30; <span class="cm">/* section h2 */</span>
+<span class="kw">font-variation-settings</span>: <span class="val">'opsz'</span> 96,  <span class="val">'SOFT'</span> 0;  <span class="cm">/* num-large, preço */</span>
+<span class="kw">font-variation-settings</span>: <span class="val">'opsz'</span> 72,  <span class="val">'SOFT'</span> 80; <span class="cm">/* blockquote itálico */</span>
+<span class="kw">font-variation-settings</span>: <span class="val">'opsz'</span> 48,  <span class="val">'SOFT'</span> 20; <span class="cm">/* nome/about */</span></div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       3. BOTÕES
+  ═══════════════════════════════════════════════════════════════ -->
+  <section class="ds-section" id="botoes">
+    <div class="ds-container">
+      <h2 class="ds-section-title">Botões</h2>
+      <p class="ds-section-desc">Um componente base <span class="ds-code">.btn-cta</span> com variantes de tamanho e contexto de cor.</p>
+
+      <div class="ds-subsection">
+        <p class="ds-subsection-label">btn-cta — primário (fundos claros)</p>
+        <div class="ds-preview">
+          <div style="display:flex; flex-wrap:wrap; gap:24px; align-items:center;">
+            <a href="#" class="btn-cta" onclick="return false;">
+              <span class="btn-cta-text">Verificar disponibilidade de agenda</span>
+              <span class="btn-cta-arrow">→</span>
+            </a>
+            <a href="#" class="btn-cta btn-cta-sm" onclick="return false;">
+              <span class="btn-cta-text">Verificar agenda</span>
+              <span class="btn-cta-arrow">→</span>
+            </a>
+          </div>
+        </div>
+        <div class="ds-code-block">&lt;a href="URL_WHATSAPP" <span class="kw">class</span>="<span class="val">btn-cta</span>"&gt;
+  &lt;span <span class="kw">class</span>="<span class="val">btn-cta-text</span>"&gt;Verificar disponibilidade de agenda&lt;/span&gt;
+  &lt;span <span class="kw">class</span>="<span class="val">btn-cta-arrow</span>"&gt;→&lt;/span&gt;
+&lt;/a&gt;
+
+<span class="cm">/* Variante sm (sticky nav) */</span>
+&lt;a href="URL" <span class="kw">class</span>="<span class="val">btn-cta btn-cta-sm</span>"&gt;...&lt;/a&gt;
+
+<span class="cm">/* Variante full-width */</span>
+&lt;a href="URL" <span class="kw">class</span>="<span class="val">btn-cta btn-cta-full</span>"&gt;...&lt;/a&gt;</div>
+      </div>
+
+      <div class="ds-subsection" style="margin-top:32px;">
+        <p class="ds-subsection-label">btn-cta-light — variante para fundos escuros</p>
+        <div class="ds-preview-dark">
+          <a href="#" class="btn-cta btn-cta-light" style="display:inline-flex;" onclick="return false;">
+            <span class="btn-cta-text">Solicitar disponibilidade de agenda</span>
+            <span class="btn-cta-arrow">→</span>
+          </a>
+        </div>
+        <div class="ds-code-block">&lt;a href="URL" <span class="kw">class</span>="<span class="val">btn-cta btn-cta-light</span>" style="<span class="val">display:inline-flex</span>"&gt;
+  &lt;span <span class="kw">class</span>="<span class="val">btn-cta-text</span>"&gt;Solicitar disponibilidade de agenda&lt;/span&gt;
+  &lt;span <span class="kw">class</span>="<span class="val">btn-cta-arrow</span>"&gt;→&lt;/span&gt;
+&lt;/a&gt;</div>
+      </div>
+
+      <div class="ds-subsection" style="margin-top:32px;">
+        <p class="ds-subsection-label">Elementos de interface — top strip, sticky nav, float whatsapp</p>
+        <div class="ds-preview-dark" style="padding:0; overflow:hidden;">
+          <div class="top-strip-ds">Programa individual · agenda limitada · <strong>próximas vagas a confirmar</strong></div>
+          <div class="sticky-specimen">
+            <span class="st-brand">IA na <em>Prática</em> · Rafael Lima</span>
+            <a href="#" class="btn-cta btn-cta-sm" onclick="return false;">
+              <span class="btn-cta-text">Verificar agenda</span>
+              <span class="btn-cta-arrow">→</span>
+            </a>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:16px; margin-top:16px;">
+          <div class="whatsapp-float-ds">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          </div>
+          <p class="ds-note">Float WhatsApp: fixed bottom-right · bg #25D366 · 56×56px · border-radius 50%</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       4. CARDS
+  ═══════════════════════════════════════════════════════════════ -->
+  <section class="ds-section" id="cards">
+    <div class="ds-container">
+      <h2 class="ds-section-title">Cards</h2>
+      <p class="ds-section-desc">Dois padrões principais de card — frame com acento coral no canto e fase com grid dividido.</p>
+
+      <div class="ds-subsection">
+        <p class="ds-subsection-label">card-frame — card editorial com L-corner coral</p>
+        <div class="ds-preview">
+          <div class="card-frame" style="max-width:480px;">
+            <div class="about-header" style="margin-bottom:24px;">
+              <div style="width:56px; height:56px; border-radius:50%; background:var(--coral-soft); border:2px solid var(--coral-soft); flex-shrink:0;"></div>
+              <div class="about-header-text">
+                <p class="about-name">Rafael Lima</p>
+                <p class="about-role">PM · Consultor de IA · Professor IEL-CE</p>
+              </div>
+            </div>
+            <div class="about-stats-row">
+              <div class="about-stat">
+                <div class="about-stat-value">+600</div>
+                <div class="about-stat-label">profissionais</div>
+              </div>
+              <div class="about-stat">
+                <div class="about-stat-value">R$5M</div>
+                <div class="about-stat-label">receita gerada</div>
+              </div>
+              <div class="about-stat">
+                <div class="about-stat-value">2.300h</div>
+                <div class="about-stat-label">economizadas</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="ds-note">Pseudo-elementos ::before (28px × 1px) e ::after (1px × 28px) formam o "L" de coral no canto superior esquerdo. Não adicione border-radius.</p>
+        <div class="ds-code-block">&lt;div <span class="kw">class</span>="<span class="val">card-frame</span>"&gt;
+  <span class="cm">&lt;!-- conteúdo --&gt;</span>
+&lt;/div&gt;
+
+<span class="cm">/* CSS essencial */</span>
+.card-frame { background: <span class="val">var(--cream-50)</span>; border: <span class="val">1px solid var(--cream-200)</span>; padding: <span class="val">32px</span>; position: <span class="val">relative</span>; }
+.card-frame::before { content: ''; position: <span class="val">absolute</span>; top: <span class="val">-1px</span>; left: <span class="val">-1px</span>; width: <span class="val">28px</span>; height: <span class="val">1px</span>; background: <span class="val">var(--coral)</span>; }
+.card-frame::after  { content: ''; position: <span class="val">absolute</span>; top: <span class="val">-1px</span>; left: <span class="val">-1px</span>; width: <span class="val">1px</span>; height: <span class="val">28px</span>; background: <span class="val">var(--coral)</span>; }</div>
+      </div>
+
+      <div class="ds-subsection" style="margin-top:40px;">
+        <p class="ds-subsection-label">phase-item — fase com num-large (grid 2×2)</p>
+        <div class="ds-preview">
+          <div class="phase-grid" style="max-width:600px;">
+            <div class="phase-item">
+              <div class="num-large">01</div>
+              <div class="phase-sessions">Sessões 1–2 · 2 horas</div>
+              <p class="phase-title">Diagnóstico</p>
+              <p class="phase-desc">Mapeamos sua rotina em 5 dimensões: dados, tecnologia, pessoas, processos e governança.</p>
+              <p class="phase-why"><strong>Por quê:</strong> sem diagnóstico real, a solução mais provável é a que já não funcionou.</p>
+            </div>
+            <div class="phase-item">
+              <div class="num-large">02</div>
+              <div class="phase-sessions">Sessões 3–4 · 2 horas</div>
+              <p class="phase-title">Mapeamento</p>
+              <p class="phase-desc">Priorizamos oportunidades com scorecard Valor × Implementabilidade × Prontidão.</p>
+              <p class="phase-why"><strong>Por quê:</strong> nem toda oportunidade de IA vale seu tempo.</p>
+            </div>
+          </div>
+        </div>
+        <div class="ds-code-block">&lt;div <span class="kw">class</span>="<span class="val">phase-grid</span>"&gt;
+  &lt;div <span class="kw">class</span>="<span class="val">phase-item</span>"&gt;
+    &lt;div <span class="kw">class</span>="<span class="val">num-large</span>"&gt;01&lt;/div&gt;
+    &lt;div <span class="kw">class</span>="<span class="val">phase-sessions</span>"&gt;Sessões 1–2 · 2 horas&lt;/div&gt;
+    &lt;p <span class="kw">class</span>="<span class="val">phase-title</span>"&gt;Diagnóstico&lt;/p&gt;
+    &lt;p <span class="kw">class</span>="<span class="val">phase-desc</span>"&gt;...&lt;/p&gt;
+    &lt;p <span class="kw">class</span>="<span class="val">phase-why</span>"&gt;&lt;strong&gt;Por quê:&lt;/strong&gt; ...&lt;/p&gt;
+  &lt;/div&gt;
+  <span class="cm">&lt;!-- repetir × 4 --&gt;</span>
+&lt;/div&gt;</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       5. SECTION-HEADER
+  ═══════════════════════════════════════════════════════════════ -->
+  <section class="ds-section" id="secoes">
+    <div class="ds-container">
+      <h2 class="ds-section-title">Section Header (padrão Hibra)</h2>
+      <p class="ds-section-desc">Grid de 2 colunas: <span class="ds-code">120px · 1fr</span>. Coluna esquerda: número + regra coral. Coluna direita: título + lead. Colapsa para 1 coluna em mobile.</p>
+
+      <div class="ds-preview">
+        <div class="section-header" style="margin-bottom:0;">
+          <div class="section-num">01 ·</div>
+          <div>
+            <h2 class="section-title">Isso soa familiar?</h2>
+            <p class="section-lead">Clique nos pontos que parecem com você. Se você chegou até aqui, provavelmente já tentou — e travou.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-code-block">&lt;div <span class="kw">class</span>="<span class="val">section-header</span>"&gt;
+  &lt;div <span class="kw">class</span>="<span class="val">section-num</span>"&gt;01 ·&lt;/div&gt;
+  &lt;div&gt;
+    &lt;h2 <span class="kw">class</span>="<span class="val">section-title</span>"&gt;Isso soa familiar?&lt;/h2&gt;
+    &lt;p <span class="kw">class</span>="<span class="val">section-lead</span>"&gt;Texto de introdução da seção.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+<span class="cm">/* Seções com fundo alternado */</span>
+&lt;section <span class="kw">class</span>="<span class="val">section</span>"&gt;                           <span class="cm">&lt;!-- cream-100 (padrão) --&gt;</span>
+&lt;section <span class="kw">class</span>="<span class="val">section</span>" style="<span class="val">background:var(--cream-50)</span>"&gt;  <span class="cm">&lt;!-- cream-50 (alternado) --&gt;</span>
+&lt;section <span class="kw">class</span>="<span class="val">section-dark</span>"&gt;                     <span class="cm">&lt;!-- terra-900 (investimento, closing) --&gt;</span></div>
+
+      <p class="ds-note">Seções alternam: cream-100 (base) → cream-50 (alternada) → cream-100 → cream-50 → dark (investimento) → dark (fechamento). O olho descansa na alternância sutil.</p>
+
+      <div class="ds-subsection" style="margin-top:40px;">
+        <p class="ds-subsection-label">Blockquote editorial</p>
+        <div class="ds-preview">
+          <blockquote class="blockquote-editorial" style="max-width:560px;">
+            <p>Se algum desses soa familiar: o problema não é você. Não é comprometimento. Não é capacidade técnica.<br><br><strong>É a ausência de diagnóstico. Ferramenta sem método vira brinquedo.</strong></p>
+            <cite>Rafael Lima · PM · Professor IEL-CE</cite>
+          </blockquote>
+        </div>
+        <div class="ds-code-block">&lt;blockquote <span class="kw">class</span>="<span class="val">blockquote-editorial</span>"&gt;
+  &lt;p&gt;Texto da citação em itálico...&lt;/p&gt;
+  &lt;cite&gt;Autor · Papel&lt;/cite&gt;
+&lt;/blockquote&gt;
+
+<span class="cm">/* Regra: border-left apenas — NUNCA background fill */</span></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       6. PAIN CARDS INTERATIVOS
+  ═══════════════════════════════════════════════════════════════ -->
+  <section class="ds-section" id="pain">
+    <div class="ds-container">
+      <h2 class="ds-section-title">Pain Cards Interativos</h2>
+      <p class="ds-section-desc">Clique para ativar. Ao marcar: muda bg para coral-soft, ativa o contador e revela o resolve da dor.</p>
+
+      <div class="ds-preview">
+        <div class="pain-list" style="max-width:640px; margin-bottom:16px;">
+          <div class="pain-card" onclick="togglePainDS(this)">
+            <div class="pain-icon">☐</div>
+            Assisti tutorial, funcionou no demo. Na hora de aplicar no meu dia, trava.
+            <div class="pain-resolve">
+              <div class="pain-resolve-inner">
+                <div class="pain-resolve-content">
+                  <div class="pain-resolve-label">Como o programa resolve</div>
+                  <div class="pain-resolve-body">Na mentoria, trabalhamos dentro do seu contexto real desde a sessão 1. Você constrói a solução junto, no seu processo.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pain-card" onclick="togglePainDS(this)">
+            <div class="pain-icon">☐</div>
+            Passo 2 horas no ChatGPT e o resultado ainda não serve para enviar.
+            <div class="pain-resolve">
+              <div class="pain-resolve-inner">
+                <div class="pain-resolve-content">
+                  <div class="pain-resolve-label">Como o programa resolve</div>
+                  <div class="pain-resolve-body">Prompt sem contexto produz resultado genérico. Na calibração, você sai com estrutura de prompt testada no seu caso.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pain-counter" id="dsCounter" style="max-width:640px;">
+          <div class="pain-counter-box">
+            <div class="pain-counter-num" id="dsPainNum">0</div>
+            <p class="pain-counter-text">pontos identificados — o diagnóstico já começou.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-code-block">&lt;div <span class="kw">class</span>="<span class="val">pain-list</span>"&gt;
+  &lt;div <span class="kw">class</span>="<span class="val">pain-card</span>" onclick="<span class="val">togglePain(this)</span>"&gt;
+    &lt;div <span class="kw">class</span>="<span class="val">pain-icon</span>"&gt;☐&lt;/div&gt;
+    Texto da dor aqui.
+    &lt;div <span class="kw">class</span>="<span class="val">pain-resolve</span>"&gt;
+      &lt;div <span class="kw">class</span>="<span class="val">pain-resolve-inner</span>"&gt;
+        &lt;div <span class="kw">class</span>="<span class="val">pain-resolve-content</span>"&gt;
+          &lt;div <span class="kw">class</span>="<span class="val">pain-resolve-label</span>"&gt;Como o programa resolve&lt;/div&gt;
+          &lt;div <span class="kw">class</span>="<span class="val">pain-resolve-body</span>"&gt;Texto da resolução...&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div <span class="kw">class</span>="<span class="val">pain-counter</span>" id="painCounter"&gt;
+  &lt;div <span class="kw">class</span>="<span class="val">pain-counter-box</span>"&gt;
+    &lt;div <span class="kw">class</span>="<span class="val">pain-counter-num</span>" id="painCount"&gt;0&lt;/div&gt;
+    &lt;p <span class="kw">class</span>="<span class="val">pain-counter-text</span>"&gt;pontos identificados — o diagnóstico já começou.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+<span class="cm">/* JavaScript — pain cards */</span>
+var painN = 0;
+function togglePain(card) {
+  var was = card.classList.contains('checked');
+  card.classList.toggle('checked');
+  var icon = card.querySelector('.pain-icon');
+  painN += was ? -1 : 1;
+  if (icon) icon.textContent = was ? '☐' : '✓';
+  document.getElementById('painCount').textContent = Math.max(0, painN);
+  document.getElementById('painCounter').classList.toggle('visible', painN > 0);
+}</div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       7. TABLE FORMAL (entregas)
+  ═══════════════════════════════════════════════════════════════ -->
+  <section class="ds-section" id="entregas">
+    <div class="ds-container">
+      <h2 class="ds-section-title">Table Formal</h2>
+      <p class="ds-section-desc">Tabela editorial para listar entregas. Primeira coluna: número coral. Corpo: título + descrição + transformação (seta →). Linha bônus com ocre.</p>
+
+      <div class="ds-preview">
+        <table class="formal">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Entrega</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>01</td>
+              <td>
+                <span class="dlv-title">Diagnóstico 5D — mapa real do seu ponto de partida</span>
+                <span class="dlv-desc">Análise do seu papel em 5 dimensões: dados, tecnologia, pessoas, processos e governança.</span>
+                <span class="dlv-shift">De "acho que tenho potencial com IA" para "sei exatamente onde e por quê".</span>
+              </td>
+            </tr>
+            <tr>
+              <td>02</td>
+              <td>
+                <span class="dlv-title">Mapa de Oportunidades com scorecard VIP</span>
+                <span class="dlv-desc">Toda oportunidade de IA avaliada por Valor × Implementabilidade × Prontidão.</span>
+                <span class="dlv-shift">De "tudo pode ser automatizado" para "isso aqui vale, aquilo ali espera".</span>
+              </td>
+            </tr>
+            <tr style="background:var(--ocre-soft);">
+              <td style="color:var(--ocre);">+</td>
+              <td>
+                <span class="dlv-bonus-label">Bônus · Incluso</span>
+                <span class="dlv-title">Check-in 30 dias pós-programa</span>
+                <span class="dlv-desc">30 minutos de sessão 30 dias após a última sessão para revisitar o Plano dos 30 Dias.</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ds-code-block">&lt;table <span class="kw">class</span>="<span class="val">formal</span>"&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th&gt;#&lt;/th&gt;&lt;th&gt;Entrega&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;01&lt;/td&gt;
+      &lt;td&gt;
+        &lt;span <span class="kw">class</span>="<span class="val">dlv-title</span>"&gt;Título da entrega&lt;/span&gt;
+        &lt;span <span class="kw">class</span>="<span class="val">dlv-desc</span>"&gt;Descrição detalhada...&lt;/span&gt;
+        &lt;span <span class="kw">class</span>="<span class="val">dlv-shift</span>"&gt;De X para Y.&lt;/span&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    <span class="cm">&lt;!-- linha bônus --&gt;</span>
+    &lt;tr <span class="kw">style</span>="<span class="val">background:var(--ocre-soft)</span>"&gt;
+      &lt;td <span class="kw">style</span>="<span class="val">color:var(--ocre)</span>"&gt;+&lt;/td&gt;
+      &lt;td&gt;
+        &lt;span <span class="kw">class</span>="<span class="val">dlv-bonus-label</span>"&gt;Bônus · Incluso&lt;/span&gt;
+        &lt;span <span class="kw">class</span>="<span class="val">dlv-title</span>"&gt;...&lt;/span&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       8. COMPARAÇÃO A×B
+  ═══════════════════════════════════════════════════════════════ -->
+  <section class="ds-section" id="comparacao">
+    <div class="ds-container">
+      <h2 class="ds-section-title">Comparação A×B</h2>
+      <p class="ds-section-desc">Grid editorial de 2 colunas. Sem background fill — só <span class="ds-code">border-left</span>. Coluna "sim" em coral, coluna "não" em cream-200.</p>
+
+      <div class="ds-preview">
+        <div class="compare-grid">
+          <div class="compare-col yes">
+            <p class="compare-header">É para você se...</p>
+            <ul class="compare-list">
+              <li>Você é gestor, coordenador ou head de área</li>
+              <li>Já tentou aplicar IA e ficou preso no uso genérico</li>
+              <li>Quer resultado mensurável — não mais conteúdo sobre IA</li>
+            </ul>
+          </div>
+          <div class="compare-col no">
+            <p class="compare-header">Não é para você se...</p>
+            <ul class="compare-list">
+              <li>Quer aprender a programar com IA</li>
+              <li>Precisa de roadmap estratégico para a empresa</li>
+              <li>Quer kit de prompts pronto</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-code-block">&lt;div <span class="kw">class</span>="<span class="val">compare-grid</span>"&gt;
+  &lt;div <span class="kw">class</span>="<span class="val">compare-col yes</span>"&gt;
+    &lt;p <span class="kw">class</span>="<span class="val">compare-header</span>"&gt;É para você se...&lt;/p&gt;
+    &lt;ul <span class="kw">class</span>="<span class="val">compare-list</span>"&gt;
+      &lt;li&gt;...&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+  &lt;div <span class="kw">class</span>="<span class="val">compare-col no</span>"&gt;
+    &lt;p <span class="kw">class</span>="<span class="val">compare-header</span>"&gt;Não é para você se...&lt;/p&gt;
+    &lt;ul <span class="kw">class</span>="<span class="val">compare-list</span>"&gt;
+      &lt;li&gt;...&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       9. FAQ ACCORDION
+  ═══════════════════════════════════════════════════════════════ -->
+  <section class="ds-section" id="faq">
+    <div class="ds-container">
+      <h2 class="ds-section-title">FAQ Accordion</h2>
+      <p class="ds-section-desc">Accordion puro CSS + JS mínimo. Técnica <span class="ds-code">grid-template-rows: 0fr → 1fr</span> para animação de altura sem JavaScript de medição.</p>
+
+      <div class="ds-preview">
+        <div class="faq-list" style="max-width:640px;">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span style="font-size:10px; font-weight:700; letter-spacing:.1em; color:var(--text-muted); flex-shrink:0; min-width:24px;">01</span>
+              Minha empresa tem restrições de dados. Posso participar?
+              <span class="faq-chevron">⌄</span>
+            </button>
+            <div class="faq-answer-wrap"><div class="faq-answer-inner">
+              <div class="faq-answer">Sim — e isso é exatamente por que temos a sessão de Diretrizes de Uso Responsável. <strong>A maioria dos ganhos de IA na rotina de gestores não exige dado sensível — exige método.</strong></div>
+            </div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span style="font-size:10px; font-weight:700; letter-spacing:.1em; color:var(--text-muted); flex-shrink:0; min-width:24px;">02</span>
+              Preciso saber programar?
+              <span class="faq-chevron">⌄</span>
+            </button>
+            <div class="faq-answer-wrap"><div class="faq-answer-inner">
+              <div class="faq-answer">Não. O programa funciona com as ferramentas que você já usa — ou com alternativas no-code que não exigem linha de código.</div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-code-block">&lt;div <span class="kw">class</span>="<span class="val">faq-list</span>"&gt;
+  &lt;div <span class="kw">class</span>="<span class="val">faq-item</span>"&gt;
+    &lt;button <span class="kw">class</span>="<span class="val">faq-question</span>"&gt;
+      &lt;span <span class="kw">class</span>="<span class="val">faq-num</span>"&gt;01&lt;/span&gt;
+      Pergunta aqui?
+      &lt;span <span class="kw">class</span>="<span class="val">faq-chevron</span>"&gt;⌄&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;div <span class="kw">class</span>="<span class="val">faq-answer-wrap</span>"&gt;
+      &lt;div <span class="kw">class</span>="<span class="val">faq-answer-inner</span>"&gt;
+        &lt;div <span class="kw">class</span>="<span class="val">faq-answer</span>"&gt;Resposta...&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+<span class="cm">/* JS — accordion (fecha o aberto ao abrir novo) */</span>
+document.querySelectorAll('.faq-question').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var item = btn.closest('.faq-item');
+    var open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(el) { el.classList.remove('open'); });
+    if (!open) item.classList.add('open');
+  });
+});</div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       10. DARK SECTION (Investimento)
+  ═══════════════════════════════════════════════════════════════ -->
+  <section class="ds-section" id="dark">
+    <div class="ds-container">
+      <h2 class="ds-section-title">Dark Section (Investimento)</h2>
+      <p class="ds-section-desc">Seções com fundo <span class="ds-code">--terra-900</span>. Texto em rgba branco com opacidades diferentes. Todos os componentes têm variante dark.</p>
+
+      <div class="ds-preview-dark">
+        <div style="margin-bottom:40px;">
+          <p class="price-label-dark">Investimento pelo programa completo</p>
+          <p class="price-main-dark"><sup>R$</sup>4.000</p>
+          <p class="price-note-dark">16 horas de trabalho 1:1 com metodologia, entregáveis e acompanhamento.</p>
+          <div class="price-pix-dark" style="margin-top:18px;">✓ Forma preferida — 2× R$ 2.000 no Pix · 50% para começar · 50% após sessão 4</div>
+        </div>
+        <div class="guarantee-dark" style="margin-bottom:40px;">
+          <p class="guarantee-dark-label">Skin in the Game · Garantia natural</p>
+          <h3 class="guarantee-dark-title">Você só paga a segunda metade se sentir que avançou.</h3>
+          <p class="guarantee-dark-body">O pagamento em 2 parcelas não é só praticidade. É o modelo de garantia: se ao fim da sessão 4 a mentoria não estiver entregando o que combinamos, você simplesmente não paga o restante.</p>
+        </div>
+        <a href="#" class="btn-cta btn-cta-light" style="display:inline-flex;" onclick="return false;">
+          <span class="btn-cta-text">Solicitar disponibilidade de agenda</span>
+          <span class="btn-cta-arrow">→</span>
+        </a>
+      </div>
+
+      <div class="ds-code-block"><span class="cm">/* Seção dark — estrutura padrão */</span>
+&lt;section <span class="kw">class</span>="<span class="val">section-dark</span>"&gt;
+  &lt;div <span class="kw">class</span>="<span class="val">container</span>"&gt;
+    &lt;div <span class="kw">class</span>="<span class="val">section-header reveal</span>"&gt;
+      &lt;div <span class="kw">class</span>="<span class="val">section-num</span>"&gt;07 ·&lt;/div&gt;
+      &lt;div&gt;
+        &lt;h2 <span class="kw">class</span>="<span class="val">section-title</span>"&gt;Investimento&lt;/h2&gt;
+        &lt;p <span class="kw">class</span>="<span class="val">section-lead</span>"&gt;...&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    <span class="cm">&lt;!-- price-display, guarantee-dark, btn-cta-light --&gt;</span>
+  &lt;/div&gt;
+&lt;/section&gt;
+
+<span class="cm">/* Opacidades de texto em dark sections */</span>
+rgba(<span class="val">255,255,255,.55</span>)  <span class="cm">→ texto primário (hero-sub)</span>
+rgba(<span class="val">255,255,255,.45</span>)  <span class="cm">→ texto secundário (price-note, body)</span>
+rgba(<span class="val">255,255,255,.3</span>)   <span class="cm">→ labels, hero-stat-label</span>
+rgba(<span class="val">255,255,255,.28</span>)  <span class="cm">→ closing-final, cta-sub</span>
+rgba(<span class="val">255,255,255,.1</span>)   <span class="cm">→ bordas de separação</span>
+rgba(<span class="val">255,255,255,.07</span>)  <span class="cm">→ bordas muito sutis</span></div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       11. STATS BLOCKS
+  ═══════════════════════════════════════════════════════════════ -->
+  <section class="ds-section" id="stats">
+    <div class="ds-container">
+      <h2 class="ds-section-title">Stats Blocks</h2>
+      <p class="ds-section-desc">Dois padrões: <span class="ds-code">hero-stat-block</span> para dark sections (4 colunas) e <span class="ds-code">about-stat</span> para cards claros (3 colunas).</p>
+
+      <div class="ds-subsection">
+        <p class="ds-subsection-label">hero-stats-row — dark, 4 colunas</p>
+        <div class="ds-preview-dark" style="padding:0; overflow:hidden;">
+          <div class="hero-stats-row">
+            <div class="hero-stat-block">
+              <div class="hero-stat-value">16h</div>
+              <div class="hero-stat-label">mentoria 1:1</div>
+            </div>
+            <div class="hero-stat-block">
+              <div class="hero-stat-value">7</div>
+              <div class="hero-stat-label">entregas concretas</div>
+            </div>
+            <div class="hero-stat-block">
+              <div class="hero-stat-value">4</div>
+              <div class="hero-stat-label">fases estruturadas</div>
+            </div>
+            <div class="hero-stat-block">
+              <div class="hero-stat-value">30d</div>
+              <div class="hero-stat-label">acompanhamento pós</div>
+            </div>
+          </div>
+        </div>
+        <div class="ds-code-block">&lt;div <span class="kw">class</span>="<span class="val">hero-stats-row</span>"&gt;
+  &lt;div <span class="kw">class</span>="<span class="val">hero-stat-block</span>"&gt;
+    &lt;div <span class="kw">class</span>="<span class="val">hero-stat-value</span>"&gt;16h&lt;/div&gt;
+    &lt;div <span class="kw">class</span>="<span class="val">hero-stat-label</span>"&gt;mentoria 1:1&lt;/div&gt;
+  &lt;/div&gt;
+  <span class="cm">&lt;!-- repetir × 4 --&gt;</span>
+&lt;/div&gt;</div>
+      </div>
+
+      <div class="ds-subsection" style="margin-top:40px;">
+        <p class="ds-subsection-label">about-stats-row — claro, 3 colunas</p>
+        <div class="ds-preview">
+          <div class="about-stats-row" style="max-width:500px;">
+            <div class="about-stat">
+              <div class="about-stat-value">+600</div>
+              <div class="about-stat-label">profissionais capacitados</div>
+            </div>
+            <div class="about-stat">
+              <div class="about-stat-value">R$5M</div>
+              <div class="about-stat-label">receita incremental</div>
+            </div>
+            <div class="about-stat">
+              <div class="about-stat-value">2.300h</div>
+              <div class="about-stat-label">economizadas/ano</div>
+            </div>
+          </div>
+        </div>
+        <div class="ds-code-block">&lt;div <span class="kw">class</span>="<span class="val">about-stats-row</span>"&gt;
+  &lt;div <span class="kw">class</span>="<span class="val">about-stat</span>"&gt;
+    &lt;div <span class="kw">class</span>="<span class="val">about-stat-value</span>"&gt;+600&lt;/div&gt;
+    &lt;div <span class="kw">class</span>="<span class="val">about-stat-label</span>"&gt;profissionais capacitados&lt;/div&gt;
+  &lt;/div&gt;
+  <span class="cm">&lt;!-- repetir × 3 --&gt;</span>
+&lt;/div&gt;</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       12. PADRÕES DE COMPOSIÇÃO
+  ═══════════════════════════════════════════════════════════════ -->
+  <section class="ds-section" id="padroes">
+    <div class="ds-container">
+      <h2 class="ds-section-title">Padrões de Composição</h2>
+      <p class="ds-section-desc">Como os componentes se combinam para formar as seções da página. Ordem, alternância de fundo e uso correto de reveal.</p>
+
+      <div class="ds-subsection">
+        <p class="ds-subsection-label">Estrutura da página — 10 seções em ordem</p>
+        <div style="display:flex; flex-direction:column; gap:2px;">
+          <div style="padding:12px 16px; background:var(--terra-800); color:rgba(255,255,255,.5); font-size:12px; display:flex; align-items:center; justify-content:space-between;">
+            <span style="color:rgba(255,255,255,.3); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.08em;">Top Strip</span>
+            <span style="font-size:11px; color:rgba(255,255,255,.25);">terra-800</span>
+          </div>
+          <div style="padding:12px 16px; background:var(--terra-900); color:rgba(255,255,255,.5); font-size:12px; display:flex; align-items:center; justify-content:space-between;">
+            <span><span style="color:var(--coral);">Hero Dark</span> — eyebrow + headline + sub + CTA + <strong style="color:rgba(255,255,255,.5)">hero-stats-row</strong></span>
+            <span style="font-size:11px; color:rgba(255,255,255,.25);">terra-900</span>
+          </div>
+          <div style="padding:12px 16px; background:var(--cream-100); font-size:12px; display:flex; align-items:center; justify-content:space-between;">
+            <span><span style="color:var(--coral); font-weight:700;">01</span> · Isso soa familiar — section-header + pain-cards + counter + blockquote</span>
+            <span style="font-size:11px; color:var(--text-muted);">cream-100</span>
+          </div>
+          <div style="padding:12px 16px; background:var(--cream-50); font-size:12px; display:flex; align-items:center; justify-content:space-between;">
+            <span><span style="color:var(--coral); font-weight:700;">02</span> · Por que falha — section-header + mech-intro + blockquote</span>
+            <span style="font-size:11px; color:var(--text-muted);">cream-50</span>
+          </div>
+          <div style="padding:12px 16px; background:var(--cream-100); font-size:12px; display:flex; align-items:center; justify-content:space-between;">
+            <span><span style="color:var(--coral); font-weight:700;">03</span> · O método — section-header + phase-grid (2×2 com num-large)</span>
+            <span style="font-size:11px; color:var(--text-muted);">cream-100</span>
+          </div>
+          <div style="padding:12px 16px; background:var(--cream-50); font-size:12px; display:flex; align-items:center; justify-content:space-between;">
+            <span><span style="color:var(--coral); font-weight:700;">04</span> · Sobre Rafael — section-header + card-frame (foto + stats + bio + badges)</span>
+            <span style="font-size:11px; color:var(--text-muted);">cream-50</span>
+          </div>
+          <div style="padding:12px 16px; background:var(--cream-100); font-size:12px; display:flex; align-items:center; justify-content:space-between;">
+            <span><span style="color:var(--coral); font-weight:700;">05</span> · Entregas — section-header + table.formal (7 + bônus)</span>
+            <span style="font-size:11px; color:var(--text-muted);">cream-100</span>
+          </div>
+          <div style="padding:12px 16px; background:var(--cream-50); font-size:12px; display:flex; align-items:center; justify-content:space-between;">
+            <span><span style="color:var(--coral); font-weight:700;">06</span> · Para quem é — section-header + compare-grid + compare-note</span>
+            <span style="font-size:11px; color:var(--text-muted);">cream-50</span>
+          </div>
+          <div style="padding:12px 16px; background:var(--terra-900); color:rgba(255,255,255,.5); font-size:12px; display:flex; align-items:center; justify-content:space-between;">
+            <span><span style="color:var(--coral);">07</span> · Investimento — value-table + price-display + guarantee + btn-cta-light</span>
+            <span style="font-size:11px; color:rgba(255,255,255,.25);">terra-900</span>
+          </div>
+          <div style="padding:12px 16px; background:var(--cream-100); font-size:12px; display:flex; align-items:center; justify-content:space-between;">
+            <span><span style="color:var(--coral); font-weight:700;">08</span> · FAQ — section-header + faq-list (7 itens)</span>
+            <span style="font-size:11px; color:var(--text-muted);">cream-100</span>
+          </div>
+          <div style="padding:12px 16px; background:var(--terra-900); color:rgba(255,255,255,.5); font-size:12px; display:flex; align-items:center; justify-content:space-between;">
+            <span><span style="color:var(--coral);">Fechamento</span> — closing-title + body + closing-quote + btn-cta-light</span>
+            <span style="font-size:11px; color:rgba(255,255,255,.25);">terra-900</span>
+          </div>
+          <div style="padding:12px 16px; background:var(--cream-50); font-size:12px; display:flex; align-items:center; justify-content:space-between;">
+            <span>Footer — brand + contatos</span>
+            <span style="font-size:11px; color:var(--text-muted);">cream-50</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection" style="margin-top:48px;">
+        <p class="ds-subsection-label">Scroll reveal — como usar</p>
+        <div class="ds-code-block"><span class="cm">/* Adicione .reveal a qualquer elemento que deve aparecer ao scroll */</span>
+<span class="cm">/* Delays com .rd1–.rd5 para escalonar elementos de um mesmo bloco */</span>
+
+&lt;div <span class="kw">class</span>="<span class="val">section-header reveal</span>"&gt;...&lt;/div&gt;
+&lt;div <span class="kw">class</span>="<span class="val">pain-card reveal rd1</span>"&gt;...&lt;/div&gt;
+&lt;div <span class="kw">class</span>="<span class="val">pain-card reveal rd2</span>"&gt;...&lt;/div&gt;
+&lt;div <span class="kw">class</span>="<span class="val">pain-card reveal rd3</span>"&gt;...&lt;/div&gt;
+
+<span class="cm">/* JS — IntersectionObserver (cole antes de &lt;/body&gt;) */</span>
+var io = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.06, rootMargin: '0px 0px -4% 0px' });
+document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });</div>
+      </div>
+
+      <div class="ds-subsection" style="margin-top:48px;">
+        <p class="ds-subsection-label">Container e espaçamento padrão</p>
+        <div class="ds-code-block"><span class="cm">/* Container */</span>
+.container { max-width: <span class="val">920px</span>; margin: <span class="val">0 auto</span>; padding: <span class="val">0 32px</span>; }
+
+<span class="cm">/* Seções */</span>
+.section      { padding: <span class="val">88px 0</span>; }         <span class="cm">/* seção padrão */</span>
+.section-dark { background: <span class="val">var(--terra-900)</span>; padding: <span class="val">88px 0</span>; }
+
+<span class="cm">/* Section-header */</span>
+.section-header { display: <span class="val">grid</span>; grid-template-columns: <span class="val">120px 1fr</span>; gap: <span class="val">44px</span>; margin-bottom: <span class="val">60px</span>; }
+
+<span class="cm">/* Responsivo */</span>
+@media (max-width: 768px) {
+  .container     { padding: <span class="val">0 24px</span>; }
+  .section       { padding: <span class="val">64px 0</span>; }
+  .section-header { grid-template-columns: <span class="val">1fr</span>; gap: <span class="val">10px</span>; }
+  .phase-grid    { grid-template-columns: <span class="val">1fr</span>; }
+  .compare-grid  { grid-template-columns: <span class="val">1fr</span>; }
+  .hero-stats-row { grid-template-columns: <span class="val">repeat(2, 1fr)</span>; }
+  .about-stats-row { grid-template-columns: <span class="val">1fr</span>; }
+  table.formal th:first-child, table.formal td:first-child { display: <span class="val">none</span>; }
+}</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── FOOTER DO DESIGN SYSTEM ──────────────────────────────── -->
+  <footer style="background:var(--terra-900); padding:40px 0; border-top:1px solid rgba(255,255,255,.07);">
+    <div class="ds-container" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+      <div>
+        <div style="font-family:'Fraunces',serif; font-size:15px; font-weight:600; font-variation-settings:'opsz' 96,'SOFT' 30; color:var(--cream-50); margin-bottom:4px;">Design System · Mentoria IA Executiva</div>
+        <div style="font-size:12px; color:rgba(255,255,255,.3);">Tokens · Tipografia · Componentes · Padrões · @iacomrafael · Rafael Lima</div>
+      </div>
+      <div style="font-size:11px; color:rgba(255,255,255,.2); font-family:'Courier New',monospace;">github.com/rslimaeng/mentoria-ia-executiva</div>
+    </div>
+  </footer>
+
+
+  <!-- ─── SCRIPTS DO DESIGN SYSTEM ─────────────────────────────── -->
+  <script>
+    /* Pain cards — demo do design system */
+    var dsPainN = 0;
+    function togglePainDS(card) {
+      var was = card.classList.contains('checked');
+      card.classList.toggle('checked');
+      var icon = card.querySelector('.pain-icon');
+      dsPainN += was ? -1 : 1;
+      if (icon) icon.textContent = was ? '☐' : '✓';
+      document.getElementById('dsPainNum').textContent = Math.max(0, dsPainN);
+      document.getElementById('dsCounter').classList.toggle('visible', dsPainN > 0);
+    }
+
+    /* FAQ accordion — demo */
+    document.querySelectorAll('.faq-question').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var item = btn.closest('.faq-item');
+        var open = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(function(el) { el.classList.remove('open'); });
+        if (!open) item.classList.add('open');
+      });
+    });
+  </script>
+
+</body>
+</html>
