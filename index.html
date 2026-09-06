@@ -13,6 +13,12 @@
   <style>
     /* ── TOKENS ──────────────────────────────────────────────── */
     :root {
+    /* --- a letra vem do padrão, não escrita à mão. Se o padrão trocar de
+       fonte, esta página troca junto. --- */
+    --font-editorial: 'Cormorant Garamond', Georgia, serif;
+    --font-ui:        'Inter', system-ui, sans-serif;
+    --font-code:      'JetBrains Mono', 'Courier New', monospace;
+
     /* --- vindos do padrão visual (17-padrao-visual/publico) em 06/09/2026 --- */
     --coral-texto: #ad3700;   /* coral quando o papel é TEXTO sobre fundo claro — 5,62:1 */
     --sobre-coral: #2B1F17;   /* o que vai escrito EM CIMA do coral — 6,09:1 */
@@ -40,7 +46,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', system-ui, sans-serif;
+      font-family: var(--font-ui);
       background: var(--cream-100);
       color: var(--terra-900);
       line-height: 1.65;
@@ -94,7 +100,7 @@
     }
     .sticky-top.visible { transform: translateY(0); }
     .st-brand {
-      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-family: var(--font-editorial);
       font-size: 14px;
       font-weight: 300;
       color: var(--cream-50);
@@ -121,7 +127,7 @@
     }
     .btn-cta-text {
       color: var(--sobre-coral);
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-ui);
       font-size: 13px;
       font-weight: 700;
       text-transform: uppercase;
@@ -182,7 +188,7 @@
     }
     .hero-eyebrow span { color: var(--coral); }
     .hero-headline {
-      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-family: var(--font-editorial);
       font-size: clamp(44px, 8vw, 84px);
       font-weight: 300;
       line-height: 1.04;
@@ -233,7 +239,7 @@
     }
     .hero-stat-block:last-child { border-right: none; }
     .hero-stat-value {
-      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-family: var(--font-editorial);
       font-size: clamp(24px, 3.5vw, 38px);
       font-weight: 300;
       line-height: 1;
@@ -277,7 +283,7 @@
       margin-top: 12px;
     }
     .section-title {
-      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-family: var(--font-editorial);
       font-size: clamp(28px, 4.5vw, 46px);
       font-weight: 300;
       line-height: 1.08;
@@ -299,7 +305,7 @@
 
     /* ── NUM-LARGE ───────────────────────────────────────────── */
     .num-large {
-      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-family: var(--font-editorial);
       font-weight: 300;
       font-size: 52px;
       line-height: 1;
@@ -377,7 +383,7 @@
       text-align: center;
     }
     .pain-counter-num {
-      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-family: var(--font-editorial);
       font-size: 48px; font-weight: 300;
       color: var(--coral-texto);
       line-height: 1; margin-bottom: 6px;
@@ -390,7 +396,7 @@
       padding-left: 28px;
     }
     .blockquote-editorial p {
-      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-family: var(--font-editorial);
       font-style: italic;
       font-weight: 400;
       font-size: clamp(17px, 2.5vw, 22px);
@@ -402,7 +408,7 @@
       margin-top: 14px;
       font-style: normal;
       font-size: 13px;
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-ui);
       color: var(--text-muted);
       letter-spacing: .02em;
     }
@@ -463,7 +469,7 @@
 
     /* ── ABOUT (card-frame adapted) ──────────────────────────── */
     .about-name {
-      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-family: var(--font-editorial);
       font-size: 24px;
       font-weight: 300;
       color: var(--terra-900);
@@ -481,7 +487,7 @@
     .about-stat { padding: 20px 16px; border-right: 1px solid var(--cream-200); }
     .about-stat:last-child { border-right: none; }
     .about-stat-value {
-      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-family: var(--font-editorial);
       font-size: 26px; font-weight: 300;
       color: var(--coral-texto);
       line-height: 1; margin-bottom: 5px;
@@ -662,7 +668,7 @@
       padding-top: 20px; font-weight: 600; color: rgba(255,255,255,.45);
     }
     .vt-total-row .vt-val {
-      font-family: 'Cormorant Garamond', Georgia, serif; font-size: 20px;
+      font-family: var(--font-editorial); font-size: 20px;
       color: var(--cream-50);
     }
     .vt-bonus-row td { color: var(--ocre) !important; }
@@ -685,7 +691,7 @@
       color: rgba(255,255,255,.3); margin-bottom: 16px;
     }
     .price-main-dark {
-      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-family: var(--font-editorial);
       font-size: clamp(56px, 12vw, 88px);
       font-weight: 300;
       letter-spacing: -3px; line-height: 1;
@@ -710,7 +716,7 @@
       color: var(--coral); margin-bottom: 12px;
     }
     .guarantee-dark-title {
-      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-family: var(--font-editorial);
       font-size: clamp(22px, 3vw, 30px);
       font-weight: 300;
       color: var(--cream-50); line-height: 1.22; margin-bottom: 14px;
@@ -730,7 +736,7 @@
     .faq-question {
       display: flex; justify-content: space-between; align-items: center;
       gap: 16px; padding: 22px 0;
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-ui);
       font-size: 16px; font-weight: 600; color: var(--terra-900);
       cursor: pointer; text-align: left;
       background: none; border: none; width: 100%;
@@ -776,7 +782,7 @@
       pointer-events: none;
     }
     .closing-title {
-      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-family: var(--font-editorial);
       font-size: clamp(32px, 5.5vw, 56px);
       font-weight: 300;
       line-height: 1.1; letter-spacing: -.5px;
@@ -795,7 +801,7 @@
       text-align: left;
     }
     .closing-quote p {
-      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-family: var(--font-editorial);
       font-style: italic;
       font-size: clamp(17px, 2.5vw, 22px);
       color: rgba(255,255,255,.7); line-height: 1.5;
@@ -803,7 +809,7 @@
     .closing-quote cite {
       display: block; margin-top: 12px;
       font-style: normal; font-size: 13px;
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-ui);
       color: rgba(255,255,255,.3);
     }
     .closing-final {
@@ -820,7 +826,7 @@
       background: var(--cream-50);
     }
     .footer-brand {
-      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-family: var(--font-editorial);
       font-size: 15px; font-weight: 300;
       color: var(--terra-900); margin-bottom: 8px;
     }
@@ -876,6 +882,24 @@
 .btn-cta-arrow { color: #fff; }
 .section-dark .btn-cta-arrow,
 .closing-dark .btn-cta-arrow { color: var(--sobre-coral); }
+
+/* --- Quem pediu MENOS MOVIMENTO no sistema operacional.
+   A página tem animação de fundo, feixes caindo, faixa rolando e blocos que
+   sobem ao aparecer. Para quem marcou "reduzir movimento" no sistema, tudo
+   isso é desconforto — e para quem tem sensibilidade vestibular, é sintoma.
+   Aqui o conteúdo aparece inteiro e parado. Nada some. --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal, .skill-card, .resource-card, .step {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
 </style>
 </head>
 <body>
