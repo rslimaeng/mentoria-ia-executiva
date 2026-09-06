@@ -2,7 +2,7 @@
 
 ## Tecnologias
 
-- **Fraunces** — fonte serif display variável para títulos; eixos: `opsz` (9–144), `SOFT` (0–100), `wght` (300–900); carregada via Google Fonts CDN. Usada com `font-variation-settings` explícito em cada contexto.
+- **Cormorant Garamond** — fonte serif display variável para títulos; eixos: `opsz` (9–144), `SOFT` (0–100), `wght` (300–900); carregada via Google Fonts CDN. Usada com `font-variation-settings` explícito em cada contexto.
 - **Inter Tight** — fonte sans-serif principal para corpo de texto, botões e labels; pesos 400–700; carregada via Google Fonts CDN.
 - **CSS Custom Properties** — sistema de design tokens em `:root` com variáveis de cor (`--coral`, `--terra-*`, `--cream-*`, `--ocre-*`) e easing (`--ease-spring`).
 - **CSS Grid** — layout de seções: `section-header` (120px · 1fr), `phase-grid` (2×2), `compare-grid` (1fr 1fr), `hero-stats-row` (repeat 4 · 1fr), `about-stats-row` (repeat 3 · 1fr).
@@ -10,7 +10,7 @@
 - **`grid-template-rows: 0fr → 1fr`** — técnica CSS para animação suave de altura zero em accordions (FAQ e pain-resolve) sem JavaScript de altura fixa.
 - **`max-height: 0 → 160px` + `overflow: hidden`** — reveal do contador de pain cards; usa transição suave sem `height: auto`.
 - **`clamp()` CSS** — tipografia fluida nos títulos (`.hero-headline`, `.section-title`, `.price-main-dark`, `.closing-title`).
-- **`font-variation-settings`** — controle manual dos eixos da Fraunces variável: `'opsz'` controla tamanho óptico, `'SOFT'` controla arredondamento de serifa (0 = clássico, 100 = suave).
+- **Cormorant Garamond weights** — display editorial substituiu Fraunces em mai/2026; `font-weight: 300` em h1/h2 (elegância editorial), `400` em h3/h4 (legível), `300 italic` em subtítulos (caligrafia humanista). Sem `font-variation-settings`.
 - **IntersectionObserver API** — dois observadores: (1) scroll-reveal — adiciona `.visible` em elementos `.reveal` conforme entram na viewport; (2) sticky nav — aparece quando o `#hero` sai da viewport.
 - **`cubic-bezier(.16, 1, .3, 1)`** — easing spring em todas as transições animadas (hover de botão, reveals, FAQ, pain-resolve). Guardado em `--ease-spring`.
 - **`backdrop-filter: blur(20px)`** — efeito fosco na sticky nav ao fazer scroll.
