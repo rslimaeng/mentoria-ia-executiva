@@ -930,6 +930,27 @@ h1, h2, h3, .hero h1, .hero-headline {
   font-variation-settings: 'SOFT' 0, 'WONK' 1, 'opsz' 144;
 }
 em, i { font-variation-settings: 'WONK' 1, 'opsz' 144; }
+
+/* ===== PESO DA FRAUNCES — 06/09, segundo passe.
+   No primeiro passe eu troquei a família e deixei o peso 300 que vinha do CSS
+   da Cormorant. A Fraunces em 300 é fina do mesmo jeito — e o Rafael viu na
+   hora: "aparece e depois volta a fonte fina". O que ele via era o fallback
+   Georgia (encorpado) sendo substituído pela Fraunces 300 ao carregar.
+   500 é o peso que ele aprovou no mockup. Estes seletores foram medidos no
+   navegador: são os que pintam em Fraunces com peso 300 ou menos. ===== */
+.st-brand,
+.hero-headline,
+.hero-stat-value,
+.section-title,
+.num-large,
+.pain-counter-num,
+.about-name,
+.about-stat-value,
+.price-main-dark,
+.closing-title,
+.footer-brand {
+  font-weight: 500;
+}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..800,0..100,0..1;1,9..144,300..700,0..100,0..1&display=swap" rel="stylesheet">
 </head>
