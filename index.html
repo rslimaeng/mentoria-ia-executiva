@@ -13,9 +13,19 @@
   <style>
     /* ── TOKENS ──────────────────────────────────────────────── */
     :root {
+    /* --- SUPERFÍCIE CLARA — decisão de 06/09, vinda do padrão visual.
+       O hero deixou de ser escuro; o coral aberto não funciona como texto
+       sobre papel (2,34:1), então a superfície clara tem o par próprio. --- */
+    --papel:              #f4f1ec;
+    --papel-elevado:      #fbf9f6;
+    --tinta-papel:        #171310;
+    --tinta-papel-fraca:  #6b6158;   /* 5,36:1 sobre o papel */
+    --coral-papel:        #c0472a;   /* preenche · branco em cima dá 5,03:1 */
+    --coral-papel-texto:  #bb4428;   /* escreve  · 4,69:1 sobre o papel */
+
     /* --- a letra vem do padrão, não escrita à mão. Se o padrão trocar de
        fonte, esta página troca junto. --- */
-    --font-editorial: 'Cormorant Garamond', Georgia, serif;
+    --font-editorial: Fraunces, Georgia, serif;
     --font-ui:        'Inter', system-ui, sans-serif;
     --font-code:      'JetBrains Mono', 'Courier New', monospace;
 
@@ -900,7 +910,28 @@
     transform: none !important;
   }
 }
+
+/* ===== HERO SOBRE PAPEL — 06/09 ===== */
+.hero-dark { background: var(--papel-elevado) !important; }
+.hero-headline { color: var(--tinta-papel) !important; }
+.hero-headline em { color: var(--coral-papel-texto) !important; }
+.hero-eyebrow, .hero-sub, .hero-avail { color: var(--tinta-papel-fraca) !important; }
+.hero-eyebrow span { color: var(--coral-papel-texto) !important; }
+.hero-stat-value { color: var(--tinta-papel) !important; }
+.hero-stat-label { color: var(--tinta-papel-fraca) !important; }
+/* o botão dentro do hero claro: coral fechado, branco em cima */
+.hero-dark .btn-cta { background: var(--coral-papel) !important; }
+.hero-dark .btn-cta-text, .hero-dark .btn-cta-arrow { color: #fff !important; }
+.hero-dark .btn-cta-arrow { background: rgba(0,0,0,.22) !important; }
+
+/* A Fraunces é variável: sem declarar o eixo ela sai no desenho neutro.
+   WONK 1 é o que entorta os itálicos — é o motivo de ter sido escolhida. */
+h1, h2, h3, .hero h1, .hero-headline {
+  font-variation-settings: 'SOFT' 0, 'WONK' 1, 'opsz' 144;
+}
+em, i { font-variation-settings: 'WONK' 1, 'opsz' 144; }
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..800,0..100,0..1;1,9..144,300..700,0..100,0..1&display=swap" rel="stylesheet">
 </head>
 <body>
 
